@@ -1,8 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/WiviWonderWoman/DevUx/Go/lists"
+	"github.com/WiviWonderWoman/DevUx/Go/menu"
+)
 
 func main() {
 	// % warning:   fmt.Println arg list ends with reduntant newline (\n)
 	fmt.Println("Välkommen till Din digitala Att Göra Lista!")
+
+	todo, _ := lists.NewToDoList()
+
+	// fmt.Println(todo)
+
+	menu, _ := menu.NewMenu()
+	menu.Main(todo)
 }

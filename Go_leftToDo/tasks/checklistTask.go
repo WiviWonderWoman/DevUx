@@ -3,24 +3,32 @@ package tasks
 type ChecklistTask struct {
 	TaskType    string
 	Description string
-	Done        string
-	// DaysLeft    int
-	SubTask []SimpleTask
+	Done        bool
+	SubTask     []SimpleTask
 }
 
-func (c ChecklistTask) SetTask(taskType string, desc string, done string, days int, subTasks []SimpleTask) (task, error) {
-
-	ct := task{
-		TaskType:    "C",
+func NewChecklistTask(desc string, done bool, days int, subTasks []SimpleTask) (ChecklistTask, error) {
+	return ChecklistTask{
+		TaskType:    "D",
 		Description: desc,
 		Done:        done,
+		SubTask:     subTasks,
+	}, nil
+}
+
+func (c ChecklistTask) SetTask(taskType string, desc string, done bool, days int, subTasks []SimpleTask) (Task, error) {
+
+	ct := Task{
+		taskType:    "C",
+		description: desc,
+		done:        done,
 		// DaysLeft:    days,
-		SubTask: subTasks,
+		subTask: subTasks,
 	}
 	return ct, nil
 }
 
-func (c ChecklistTask) Task() (task, error) {
-	t := task{}
+func (c ChecklistTask) Task() ([]Task, error) {
+	t := []Task{}
 	return t, nil
 }

@@ -3,24 +3,30 @@ package tasks
 type SimpleTask struct {
 	TaskType    string
 	Description string
-	Done        string
-	// DaysLeft    int
-	// SubTask     []SimpleTask
+	Done        bool
 }
 
-func (s SimpleTask) SetTask(taskType string, desc string, done string, days int, subTasks []SimpleTask) (task, error) {
-
-	st := task{
+func NewSimpleTask(desc string, done bool) (SimpleTask, error) {
+	return SimpleTask{
 		TaskType:    "S",
 		Description: desc,
 		Done:        done,
+	}, nil
+}
+
+func (s SimpleTask) SetTask(taskType string, desc string, done bool, days int, subTasks []SimpleTask) (Task, error) {
+
+	st := Task{
+		taskType:    "S",
+		description: desc,
+		done:        done,
 		// DaysLeft:    days,
 		// SubTask:     subTasks,
 	}
 	return st, nil
 }
 
-func (s SimpleTask) Task() (task, error) {
-	t := task{}
+func (s SimpleTask) Task() ([]Task, error) {
+	t := []Task{}
 	return t, nil
 }

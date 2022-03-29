@@ -3,5 +3,13 @@ package lists
 import "github.com/WiviWonderWoman/DevUx/Go/tasks"
 
 type TodoList struct {
-	TS tasks.TaskService
+	ToDo    []tasks.Task
+	Archive []tasks.Task
+}
+
+func NewToDoList() (TodoList, error) {
+	return TodoList{
+		ToDo:    []tasks.Task{},
+		Archive: []tasks.Task{},
+	}, nil
 }
