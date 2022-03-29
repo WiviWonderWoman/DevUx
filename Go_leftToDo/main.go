@@ -3,5 +3,6 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello World!")
+	// % warning:   fmt.Println arg list ends with reduntant newline (\n)
+	fmt.Println("Välkommen till Din digitala Att Göra Lista!")
 }
