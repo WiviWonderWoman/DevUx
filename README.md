@@ -1,2 +1,4 @@
 # DevUx
-Degree project - UX for developers - A comparative study between C # and Go
+UX for developers - A comparative study between C # and Go from a developers point of view - my degree project
+
+
