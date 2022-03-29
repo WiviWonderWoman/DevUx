@@ -51,7 +51,7 @@ namespace LeftToDo
         //  Displaying checklist "Header" task
         public static void ShowTask(Task task, int index)
         {
-            if (task.done == null)
+            if (task.done == false)
             {
                 Console.WriteLine($" - \t{index}\t{task.description}");
             }

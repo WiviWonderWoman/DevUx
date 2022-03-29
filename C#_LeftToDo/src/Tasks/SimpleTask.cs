@@ -16,7 +16,7 @@ namespace LeftToDo
         internal static void ShowTask(Task task, int index)
         {
             var type = task.type;
-            if (task.done == null)
+            if (task.done == false)
             {
                 Console.WriteLine($"[ ]\t{index}\t{task.description}");
             }
@@ -30,7 +30,7 @@ namespace LeftToDo
         internal static void ShowTask(Task task, int outer, int inner)
         {
             var type = task.type;
-            if (task.done == null)
+            if (task.done == false)
             {
                 Console.WriteLine($"\t[ ]\t{outer} - {inner}\t{task.description}");
 

@@ -42,7 +42,7 @@ namespace LeftToDo
             for (int i = 0; i < ToDo.Count; i++)
             {
                 Task item = ToDo[i];
-                if (item.done == "X")
+                if (item.done == true)
                 {
                     AddToArcList(item);
                     ToDo.Remove(item);
@@ -69,11 +69,11 @@ namespace LeftToDo
                     var item = ToDo[i];
                     var index = i + 1;
 
-                    if (item.done == null)
+                    if (item.done == false)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                     }
-                    else if (item.done != null)
+                    else if (item.done != false)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                     }
@@ -106,11 +106,11 @@ namespace LeftToDo
 
                 var item = subList[i];
 
-                if (item.done == null)
+                if (item.done == false)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                 }
-                else if (item.done != null)
+                else if (item.done != false)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                 }
@@ -144,7 +144,7 @@ namespace LeftToDo
                         for (int j = 0; j < count; j++)
                         {
                             var subTask = task.subTask[j];
-                            if (subTask.done == "X")
+                            if (subTask.done == true)
                             {
                                 marked++;
                             }

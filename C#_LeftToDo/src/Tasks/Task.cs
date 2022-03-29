@@ -15,7 +15,7 @@ namespace LeftToDo
             get;
             set;
         }
-        public string done
+        public bool done
         {
             get;
             set;
@@ -31,13 +31,13 @@ namespace LeftToDo
         // Marks task as Done
         public void MarkAsDone()
         {
-            if (done == null)
+            if (done == false)
             {
-                done = "X";
+                done = true;
             }
-            else if (done == "X")
+            else if (done == false)
             {
-                done = null;
+                done = true;
             }
 
         }

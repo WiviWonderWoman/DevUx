@@ -16,10 +16,7 @@ namespace LeftToDo
         {
             Console.Clear();
             ShowIntro();
-            Console.WriteLine("HUVUDMENY\n");
-            Console.WriteLine("[1] Visa Att-göra uppgifter\n");
-            Console.WriteLine("[2] Visa Arkiverade uppgifter\n");
-            Console.WriteLine("[0] Avsluta");
+            Console.WriteLine("HUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta");
 
             var menu = Console.ReadLine();
 
@@ -47,11 +44,13 @@ namespace LeftToDo
         private static void ShowToDoMenu(ToDoList list)
         {
             ShowIntro();
-            Console.WriteLine("\nUNDERMENY. Vad vill du göra?\n");
-            Console.WriteLine("[1] Lägg till uppgift \n");
-            Console.WriteLine("[2] Markera / avmarkera uppgift\n");
-            Console.WriteLine("[3] Arkivera utförda uppgifter\n");
-            Console.WriteLine("[0] HUVUDMENY\n\n");
+            Console.WriteLine(
+                "\nUNDERMENY: Vad vill du göra?\n" +
+                "[1] Lägg till uppgift\n" +
+                "[2] Markera / avmarkera uppgift\n" +
+                "[3] Arkivera utförda uppgifter\n" +
+                "[0] HUVUDMENY\n"
+            );
 
             var menu = Console.ReadLine();
 
@@ -79,7 +78,6 @@ namespace LeftToDo
 
                 default:
                     ShowError();
-                    // ShowToDoMenu(list);
                     break;
             }
         }
@@ -89,11 +87,13 @@ namespace LeftToDo
         {
             list.ShowLeftToDo(list.ToDo);
             ShowIntro();
-            Console.WriteLine("\n\nUPPGIFTSMENY. Välj typ av uppgift:\n");
-            Console.WriteLine("[1] Enkel uppgift\n");
-            Console.WriteLine("[2] Deadline\n");
-            Console.WriteLine("[3] Checklista\n");
-            Console.WriteLine("[0] HUVUDMENY\n\n");
+            Console.WriteLine(
+                "\n\nUPPGIFTSMENY. Välj typ av uppgift:\n" +
+                "[1] Enkel uppgift\n" +
+                "[2] Deadline\n" +
+                "[3] Checklista\n" +
+                "[0] HUVUDMENY\n\n"
+            );
 
             var menu = Console.ReadLine();
 
