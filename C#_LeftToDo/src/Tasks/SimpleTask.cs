@@ -15,21 +15,19 @@ namespace LeftToDo
         // Displaying simple Task
         internal static void ShowTask(Task task, int index)
         {
-            var type = task.type;
             if (task.done == false)
             {
                 Console.WriteLine($"[ ]\t{index}\t{task.description}");
             }
             else
             {
-                Console.WriteLine($"[{task.done}]\t{index}\t{task.description}");
+                Console.WriteLine($"[X]\t{index}\t{task.description}");
             }
         }
 
         // Overload, Displaying simple Task in Checklist
         internal static void ShowTask(Task task, int outer, int inner)
         {
-            var type = task.type;
             if (task.done == false)
             {
                 Console.WriteLine($"\t[ ]\t{outer} - {inner}\t{task.description}");
@@ -37,7 +35,7 @@ namespace LeftToDo
             }
             else
             {
-                Console.WriteLine($"\t[{task.done}]\t{outer} - {inner}\t{task.description}");
+                Console.WriteLine($"\t[X]\t{outer} - {inner}\t{task.description}");
             }
 
         }

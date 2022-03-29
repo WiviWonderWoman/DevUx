@@ -9,7 +9,7 @@ namespace LeftToDo
         {
             Console.WriteLine("Välkommen till Din digitala Att Göra Lista!\n");
 
-            ToDoList list = new ToDoList();
+            TaskList list = new TaskList();
 
             Menu.ShowMain(list);
         }

@@ -16,14 +16,14 @@ func NewChecklistTask(desc string, done bool, days int, subTasks []SimpleTask) (
 	}, nil
 }
 
-func (c ChecklistTask) SetTask(taskType string, desc string, done bool, days int, subTasks []SimpleTask) (Task, error) {
+func (c ChecklistTask) SetTask(desc string, days int, subTasks []Task) (Task, error) {
 
 	ct := Task{
-		taskType:    "C",
+		TaskType:    "C",
 		description: desc,
-		done:        done,
+		Done:        false,
 		// DaysLeft:    days,
-		subTask: subTasks,
+		SubTask: subTasks,
 	}
 	return ct, nil
 }

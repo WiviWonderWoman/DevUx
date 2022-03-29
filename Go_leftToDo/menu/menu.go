@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/WiviWonderWoman/DevUx/Go/lists"
+	"github.com/WiviWonderWoman/DevUx/Go/tasks"
 )
 
 type Menu struct {
@@ -17,7 +18,7 @@ func intro() {
 	fmt.Println("Välj i menyn nedan, ange siffran inom [] och tryck enter.")
 }
 
-func (m Menu) Main(list lists.TodoList) {
+func (m Menu) Main(list lists.TaskList) {
 	fmt.Println("MAIN menyn", list)
 	//TODO: clear console
 	intro()
@@ -27,10 +28,10 @@ func (m Menu) Main(list lists.TodoList) {
 	input := 0
 	switch input {
 	case 1:
-		//TODO: list.ShowLeftToDo(list.ToDo);
+		list.ShowLeftToDo()
 		m.todo(list)
 	case 2:
-		//TODO: list.ShowArchive(list.Archive);
+		list.ShowArchive()
 		m.archive(list)
 	case 3:
 		m.farewell()
@@ -40,7 +41,7 @@ func (m Menu) Main(list lists.TodoList) {
 	}
 }
 
-func (m Menu) todo(list lists.TodoList) {
+func (m Menu) todo(list lists.TaskList) {
 	intro()
 	fmt.Println(
 		"\nUNDERMENY: Vad vill du göra?\n" +
@@ -56,11 +57,11 @@ func (m Menu) todo(list lists.TodoList) {
 	case 1:
 		m.task(list)
 	case 2:
-		//TODO: list.FindTaskToMark(list);
+		list.FindTask()
 		m.todo(list)
 	case 3:
-		//TODO: list.ArchiveTask();
-		//TODO: list.ShowLeftToDo(list.ToDo);
+		list.ArchiveTask()
+		list.ShowLeftToDo()
 		m.todo(list)
 	case 0:
 		//TODO: Console.Clear();
@@ -68,8 +69,8 @@ func (m Menu) todo(list lists.TodoList) {
 	}
 }
 
-func (m Menu) task(list lists.TodoList) {
-	//TODO: list.ShowLeftToDo(list.ToDo);
+func (m Menu) task(list lists.TaskList) {
+	list.ShowLeftToDo()
 	intro()
 
 	fmt.Println(
@@ -83,22 +84,23 @@ func (m Menu) task(list lists.TodoList) {
 	input := 0
 	switch input {
 	case 1:
-		//TODO: var simpelTask = new SimpleTask("");
-		//TODO: simpelTask.Create();
-		//TODO: list.AddToDoList(simpelTask);
-		//TODO: list.ShowLeftToDo(list.ToDo);
+
+		simple := tasks.Task{}
+		simple.Create("S")
+		list.AddToDoTask(simple)
+		list.ShowLeftToDo()
 		m.todo(list)
 	case 2:
-		//TODO: var deadline = new Deadline("", 0);
-		//TODO: deadline.Create();
-		//TODO: list.AddToDoList(deadline);
-		//TODO: list.ShowLeftToDo(list.ToDo);
+		deadline := tasks.Task{}
+		deadline.Create("D")
+		list.AddToDoTask(deadline)
+		list.ShowLeftToDo()
 		m.todo(list)
 	case 3:
-		//TODO: var checklist = new Checklist("");
-		//TODO: checklist.Create();
-		//TODO: list.AddToDoList(checklist);
-		//TODO: list.ShowLeftToDo(list.ToDo);
+		checklist := tasks.Task{}
+		checklist.Create("C")
+		list.AddToDoTask(checklist)
+		list.ShowLeftToDo()
 		m.todo(list)
 	case 0:
 		//TODO: Console.Clear();
@@ -109,7 +111,7 @@ func (m Menu) task(list lists.TodoList) {
 	}
 }
 
-func (m Menu) archive(list lists.TodoList) {
+func (m Menu) archive(list lists.TaskList) {
 	fmt.Println("\n[0] HUVUDMENY")
 	//TODO: read input from console
 	input := 0

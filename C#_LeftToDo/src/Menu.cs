@@ -12,7 +12,7 @@ namespace LeftToDo
         }
 
         // Mainmenu, handle user input with switch statement
-        internal static void ShowMain(ToDoList list)
+        internal static void ShowMain(TaskList list)
         {
             Console.Clear();
             ShowIntro();
@@ -23,7 +23,7 @@ namespace LeftToDo
             switch (menu)
             {
                 case "1":
-                    list.ShowLeftToDo(list.ToDo);
+                    list.ShowLeftToDo(list.ToDoList);
                     ShowToDoMenu(list);
                     break;
                 case "2":
@@ -41,7 +41,7 @@ namespace LeftToDo
         }
 
         // List menu, handle user input with switch statement
-        private static void ShowToDoMenu(ToDoList list)
+        private static void ShowToDoMenu(TaskList list)
         {
             ShowIntro();
             Console.WriteLine(
@@ -67,7 +67,7 @@ namespace LeftToDo
 
                 case "3":
                     list.ArchiveTask();
-                    list.ShowLeftToDo(list.ToDo);
+                    list.ShowLeftToDo(list.ToDoList);
                     ShowToDoMenu(list);
                     break;
 
@@ -83,9 +83,9 @@ namespace LeftToDo
         }
 
         // Task menu, handle user input with switch statement
-        private static void ShowTaskMenu(ToDoList list)
+        private static void ShowTaskMenu(TaskList list)
         {
-            list.ShowLeftToDo(list.ToDo);
+            list.ShowLeftToDo(list.ToDoList);
             ShowIntro();
             Console.WriteLine(
                 "\n\nUPPGIFTSMENY. Välj typ av uppgift:\n" +
@@ -103,7 +103,7 @@ namespace LeftToDo
                     var simpelTask = new SimpleTask("");
                     simpelTask.Create();
                     list.AddToDoList(simpelTask);
-                    list.ShowLeftToDo(list.ToDo);
+                    list.ShowLeftToDo(list.ToDoList);
                     ShowToDoMenu(list);
                     break;
 
@@ -111,7 +111,7 @@ namespace LeftToDo
                     var deadline = new Deadline("", 0);
                     deadline.Create();
                     list.AddToDoList(deadline);
-                    list.ShowLeftToDo(list.ToDo);
+                    list.ShowLeftToDo(list.ToDoList);
                     ShowToDoMenu(list);
                     break;
 
@@ -119,7 +119,7 @@ namespace LeftToDo
                     var checklist = new Checklist("");
                     checklist.Create();
                     list.AddToDoList(checklist);
-                    list.ShowLeftToDo(list.ToDo);
+                    list.ShowLeftToDo(list.ToDoList);
                     ShowToDoMenu(list);
                     break;
 
@@ -136,7 +136,7 @@ namespace LeftToDo
         }
 
         // Archive menu, lets user return to Mainmenu
-        private static void ShowArcMenu(ToDoList list)
+        private static void ShowArcMenu(TaskList list)
         {
             Console.WriteLine("\n[0] HUVUDMENY\n\n");
             var input = Console.ReadLine();

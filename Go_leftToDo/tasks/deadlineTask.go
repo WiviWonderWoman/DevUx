@@ -16,12 +16,12 @@ func NewDeadlineTask(desc string, done bool, days int) (DeadlineTask, error) {
 	}, nil
 }
 
-func (d DeadlineTask) SetTask(taskType string, desc string, done bool, days int, subTasks []SimpleTask) (Task, error) {
+func (d DeadlineTask) SetTask(desc string, days int, subTasks []Task) (Task, error) {
 
 	dt := Task{
-		taskType:    "D",
+		TaskType:    "D",
 		description: desc,
-		done:        done,
+		Done:        false,
 		daysLeft:    days,
 		// SubTask:     subTasks,
 	}

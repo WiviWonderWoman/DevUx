@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace LeftToDo
 {
     /* ToDolist handles all lists and their methods */
-    public class ToDoList
+    public class TaskList
     {
-        public List<Task> ToDo
+        public List<Task> ToDoList
         {
             get;
             private set;
@@ -18,16 +18,16 @@ namespace LeftToDo
         }
 
 
-        public ToDoList()
+        public TaskList()
         {
-            ToDo = new List<Task>();
+            ToDoList = new List<Task>();
             Archive = new List<Task>();
         }
 
         // Adds new Task to ToDo
         public void AddToDoList(Task task)
         {
-            ToDo.Add(task);
+            ToDoList.Add(task);
         }
 
         // Adds Task that should be archived to Arc
@@ -39,13 +39,13 @@ namespace LeftToDo
         // Iterates thru ToDo to find done Task to archive
         public void ArchiveTask()
         {
-            for (int i = 0; i < ToDo.Count; i++)
+            for (int i = 0; i < ToDoList.Count; i++)
             {
-                Task item = ToDo[i];
+                Task item = ToDoList[i];
                 if (item.done == true)
                 {
                     AddToArcList(item);
-                    ToDo.Remove(item);
+                    ToDoList.Remove(item);
                     i--;
                 }
             }
@@ -121,15 +121,15 @@ namespace LeftToDo
         }
 
         // Find task to mark as done / undone
-        internal void FindTaskToMark(ToDoList list)
+        internal void FindTaskToMark(TaskList list)
         {
             Console.WriteLine("\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.\n");
 
             int index = ReadInt() - 1;
 
-            for (int i = 0; i < list.ToDo.Count; i++)
+            for (int i = 0; i < list.ToDoList.Count; i++)
             {
-                var task = list.ToDo[i];
+                var task = list.ToDoList[i];
 
                 if (i == index)
                 {
@@ -165,7 +165,7 @@ namespace LeftToDo
                     }
                 }
             }
-            list.ShowLeftToDo(list.ToDo);
+            list.ShowLeftToDo(list.ToDoList);
         }
         private static int ReadInt()
         {
@@ -187,8 +187,7 @@ namespace LeftToDo
             }
             else
             {
-                Console.WriteLine($"UTFÖRDA UPPGIFTER:\n");
-                Console.WriteLine($"Status\tArkiv.\tUppgift\n");
+                Console.WriteLine($"UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift\n");
                 Console.ForegroundColor = ConsoleColor.Green;
 
                 int amount = 0;
@@ -198,18 +197,23 @@ namespace LeftToDo
 
                     if (task.type == "C")
                     {
-                        Console.WriteLine($"[{task.done}]\t\t{task.description}\n");
+                        Checklist.ShowTask(task, i + 1);
+                        // Console.WriteLine($"[{task.done}]\t\t{task.description}\n");
                         amount++;
+
                         for (int j = 0; j < task.subTask.Count; j++)
                         {
+
                             var subTask = task.subTask[j];
-                            Console.WriteLine($"\t\t[{subTask.done}]\t\t{subTask.description}\n");
+                            SimpleTask.ShowTask(subTask, j + 1);
+                            // Console.WriteLine($"\t\t[{subTask.done}]\t\t{subTask.description}\n");
                             amount++;
                         }
                     }
                     else
                     {
-                        Console.WriteLine($"[{task.done}]\t\t{task.description}\n");
+                        Checklist.ShowTask(task, i + 1);
+                        // Console.WriteLine($"[{task.done}]\t\t{task.description}\n");
                         amount++;
                     }
                 }

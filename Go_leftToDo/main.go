@@ -10,11 +10,7 @@ import (
 func main() {
 	// % warning:   fmt.Println arg list ends with reduntant newline (\n)
 	fmt.Println("Välkommen till Din digitala Att Göra Lista!")
-
-	todo, _ := lists.NewToDoList()
-
-	// fmt.Println(todo)
-
+	todo, _ := lists.NewTaskList()
 	menu, _ := menu.NewMenu()
 	menu.Main(todo)
 }

@@ -14,12 +14,12 @@ func NewSimpleTask(desc string, done bool) (SimpleTask, error) {
 	}, nil
 }
 
-func (s SimpleTask) SetTask(taskType string, desc string, done bool, days int, subTasks []SimpleTask) (Task, error) {
+func (s SimpleTask) SetTask(desc string, days int, subTasks []Task) (Task, error) {
 
 	st := Task{
-		taskType:    "S",
+		TaskType:    "S",
 		description: desc,
-		done:        done,
+		Done:        false,
 		// DaysLeft:    days,
 		// SubTask:     subTasks,
 	}
