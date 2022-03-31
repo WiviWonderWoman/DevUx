@@ -38,7 +38,7 @@ func (tdl TaskList) ArchiveTask() {
 }
 
 func (tdl TaskList) ShowLeftToDo() {
-	//ToDo: Console.Clear();
+	//To-Do: Console.Clear();
 	if len(tdl.ToDoList) < 1 {
 		fmt.Println("\n\nATT GÖRA LISTAN ÄR TOM!")
 		return
@@ -47,13 +47,13 @@ func (tdl TaskList) ShowLeftToDo() {
 	fmt.Println("Status\tNr.\tUppgift")
 	index := 0
 	for _, task := range tdl.ToDoList {
-		//ToDo: Console.ResetColor();
+		//To-Do: Console.ResetColor();
 		index++
 
 		if !task.Done {
-			//ToDo: Console.ForegroundColor = ConsoleColor.Red;
+			//To-Do: Console.ForegroundColor = ConsoleColor.Red;
 		} else if task.Done {
-			//ToDo: Console.ForegroundColor = ConsoleColor.Yellow;
+			//To-Do: Console.ForegroundColor = ConsoleColor.Yellow;
 		}
 
 		if task.TaskType == "S" {
@@ -66,28 +66,28 @@ func (tdl TaskList) ShowLeftToDo() {
 		}
 	}
 
-	//ToDo: Console.ResetColor();
+	//To-Do: Console.ResetColor();
 }
 
 func showSubTask(sub []tasks.Task, outer int) {
 	inner := 0
 	for _, subTask := range sub {
-		//ToDo: Console.ResetColor();
+		//To-Do: Console.ResetColor();
 		inner++
 
 		if !subTask.Done {
-			//ToDo: Console.ForegroundColor = ConsoleColor.Red;
+			//To-Do: Console.ForegroundColor = ConsoleColor.Red;
 		} else if subTask.Done {
-			//ToDo: Console.ForegroundColor = ConsoleColor.Yellow;
+			//To-Do: Console.ForegroundColor = ConsoleColor.Yellow;
 		}
 		subTask.ShowSubTask(subTask, outer, inner)
 	}
-	//TODO: Console.ResetColor();
+	//TO-DO: Console.ResetColor();
 }
 
 func (tdl TaskList) FindTaskToMark() {
 	fmt.Println("\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.")
-	input := 1 - 1 //TODO: read input from console int index = ReadInt() - 1;
+	input := 1 - 1 //TO-DO: read input from console int index = ReadInt() - 1;
 
 	for i := 0; i < len(tdl.ToDoList); i++ {
 		task := tdl.ToDoList[i]
@@ -95,7 +95,7 @@ func (tdl TaskList) FindTaskToMark() {
 		if input == i {
 			if task.TaskType == "C" {
 				fmt.Println("\nVilken underuppgift vill du markera / avmarkera?")
-				subInput := 1 - 1 //TODO: read input from console int subIndex = ReadInt() - 1;
+				subInput := 1 - 1 //TO-DO: read input from console int subIndex = ReadInt() - 1;
 
 				count := len(task.SubTask)
 				marked := 0
@@ -127,18 +127,18 @@ func (tdl TaskList) FindTaskToMark() {
 
 func readInt() int {
 	number := 0
-	//TODO: while (int.TryParse(Console.ReadLine(), out number) == false) { Console.WriteLine("Du skrev inte in ett tal. Försök igen.");}
+	//TO-DO: while (int.TryParse(Console.ReadLine(), out number) == false) { Console.WriteLine("Du skrev inte in ett tal. Försök igen.");}
 	return number
 }
 
 func (tdl TaskList) ShowArchive() {
-	//TODO: Console.Clear();
+	//TO-DO: Console.Clear();
 	if len(tdl.Archive) < 1 {
 		fmt.Println("\n\nARKIVET ÄR TOMT.")
 		return
 	}
 	fmt.Println("UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift")
-	//TODO: Console.ForegroundColor = ConsoleColor.Green;
+	//TO-DO: Console.ForegroundColor = ConsoleColor.Green;
 	amount := 0
 	for i := 0; i < len(tdl.Archive); i++ {
 		task := tdl.Archive[i]
@@ -150,6 +150,6 @@ func (tdl TaskList) ShowArchive() {
 			showSubTask(task.SubTask, i+1)
 		}
 	}
-	//TODO: Console.ResetColor();
+	//TO-DO: Console.ResetColor();
 	fmt.Printf("\nWOW! DU HAR UTFÖRT %v UPPGIFTER!", amount)
 }
