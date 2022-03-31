@@ -75,9 +75,10 @@ func showTaskMenu(list lists.TaskList) {
 	input := 0
 	switch input {
 	case 1:
-		simple := tasks.Task{}
-		simple.Create("S")
-		list.AddToDoTask(simple)
+		st := tasks.NewSimpleTask()
+		simpleWrapper := tasks.NewTaskWrapper(&st)
+		st.Create()
+		list.AddToDoTask(*simpleWrapper)
 		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case 2:

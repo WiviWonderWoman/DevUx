@@ -7,22 +7,22 @@ import (
 )
 
 type TaskList struct {
-	ToDoList []tasks.Task
-	Archive  []tasks.Task
+	ToDoList []tasks.TaskWrapper
+	Archive  []tasks.TaskWrapper
 }
 
 func NewTaskList() TaskList {
 	return TaskList{
-		ToDoList: []tasks.Task{},
-		Archive:  []tasks.Task{},
+		ToDoList: []tasks.TaskWrapper{},
+		Archive:  []tasks.TaskWrapper{},
 	}
 }
 
-func (tdl TaskList) AddToDoTask(task tasks.Task) {
+func (tdl TaskList) AddToDoTask(task tasks.TaskWrapper) {
 	tdl.ToDoList = append(tdl.ToDoList, task)
 }
 
-func (tdl TaskList) addTaskToArhive(task tasks.Task) {
+func (tdl TaskList) addTaskToArhive(task tasks.TaskWrapper) {
 	tdl.Archive = append(tdl.Archive, task)
 }
 
@@ -60,7 +60,7 @@ func (tdl TaskList) ShowLeftToDo() {
 			task.ShowTask(task, index)
 		} else if task.TaskType == "C" {
 			task.ShowTask(task, index)
-			subTask(task.SubTask, index)
+			showSubTask(task.SubTask, index)
 		} else if task.TaskType == "D" {
 			task.ShowTask(task, index)
 		}
@@ -69,7 +69,7 @@ func (tdl TaskList) ShowLeftToDo() {
 	//ToDo: Console.ResetColor();
 }
 
-func subTask(sub []tasks.Task, outer int) {
+func showSubTask(sub []tasks.Task, outer int) {
 	inner := 0
 	for _, subTask := range sub {
 		//ToDo: Console.ResetColor();
@@ -85,34 +85,32 @@ func subTask(sub []tasks.Task, outer int) {
 	//TODO: Console.ResetColor();
 }
 
-//FIXME: skriv om looparna till "vanliga loopar"
 func (tdl TaskList) FindTaskToMark() {
 	fmt.Println("\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.")
-	//TODO: read input from console
-	//TODO: int index = ReadInt() - 1;
-	input := 1 - 1
+	input := 1 - 1 //TODO: read input from console int index = ReadInt() - 1;
 
-	index := 0
-	for _, task := range tdl.ToDoList {
-		if input == index {
+	for i := 0; i < len(tdl.ToDoList); i++ {
+		task := tdl.ToDoList[i]
+
+		if input == i {
 			if task.TaskType == "C" {
 				fmt.Println("\nVilken underuppgift vill du markera / avmarkera?")
-				//TODO: read input from console
-				//TODO: int subIndex = ReadInt() - 1;
-				subInput := 1 - 1
-				subIndex := 0
+				subInput := 1 - 1 //TODO: read input from console int subIndex = ReadInt() - 1;
+
 				count := len(task.SubTask)
 				marked := 0
-				for _, subTask := range task.SubTask {
-					if subTask.Done == true {
+
+				for j := 0; j < count; j++ {
+					subTask := task.SubTask[j]
+
+					if subTask.Done {
 						marked++
 					}
 
-					if subInput == subIndex {
+					if subInput == j {
 						task.MarkAsDone()
 						marked++
 					}
-					subIndex++
 				}
 
 				if count == marked {
@@ -123,8 +121,6 @@ func (tdl TaskList) FindTaskToMark() {
 				task.MarkAsDone()
 			}
 		}
-
-		index++
 	}
 	tdl.ShowLeftToDo()
 }
@@ -139,31 +135,21 @@ func (tdl TaskList) ShowArchive() {
 	//TODO: Console.Clear();
 	if len(tdl.Archive) < 1 {
 		fmt.Println("\n\nARKIVET ÄR TOMT.")
-	} else {
-		fmt.Println("UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift")
-		//TODO: Console.ForegroundColor = ConsoleColor.Green;
-		amount := 0
-		index := 0
-		subIndex := 0
-		for _, task := range tdl.Archive {
-			if task.TaskType == "C" {
-				index++
-				task.ShowTask(task, index)
-				// fmt.Println(task.Done, "\t\t", task.Description)
-				amount++
-				for _, subTask := range task.SubTask {
-					subIndex++
-					subTask.ShowSubTask(task, index, subIndex)
-					// fmt.Println(subTask.Done, "\t\t", subTask.Description)
-					amount++
-				}
-			} else {
-				task.ShowTask(task, index)
-				// fmt.Println(task.Done, "\t\t", task.Description)
-				amount++
-			}
-		}
-		//TODO: Console.ResetColor();
-		fmt.Println("\nWOW! DU HAR UTFÖRT {amount} UPPGIFTER!")
+		return
 	}
+	fmt.Println("UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift")
+	//TODO: Console.ForegroundColor = ConsoleColor.Green;
+	amount := 0
+	for i := 0; i < len(tdl.Archive); i++ {
+		task := tdl.Archive[i]
+		amount++
+
+		task.ShowTask(task, i+1)
+
+		if task.TaskType == "C" {
+			showSubTask(task.SubTask, i+1)
+		}
+	}
+	//TODO: Console.ResetColor();
+	fmt.Printf("\nWOW! DU HAR UTFÖRT %v UPPGIFTER!", amount)
 }

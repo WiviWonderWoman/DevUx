@@ -180,43 +180,26 @@ namespace LeftToDo
             if (Arc.Count < 1)
             {
                 Console.WriteLine($"\n\nARKIVET ÄR TOMT.\n\n");
+                return;
             }
-            else
+            Console.WriteLine($"UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            int amount = 0;
+            for (int i = 0; i < Arc.Count; i++)
             {
-                Console.WriteLine($"UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift\n");
-                Console.ForegroundColor = ConsoleColor.Green;
+                var task = Arc[i];
+                amount++;
 
-                int amount = 0;
-                for (int i = 0; i < Arc.Count; i++)
+                Checklist.ShowTask(task, i + 1);
+
+                if (task.type == "C")
                 {
-                    var task = Arc[i];
-
-                    if (task.type == "C")
-                    {
-                        Checklist.ShowTask(task, i + 1);
-                        // Console.WriteLine($"[{task.done}]\t\t{task.description}\n");
-                        amount++;
-
-                        for (int j = 0; j < task.subTask.Count; j++)
-                        {
-
-                            var subTask = task.subTask[j];
-                            SimpleTask.ShowTask(subTask, j + 1);
-                            // Console.WriteLine($"\t\t[{subTask.done}]\t\t{subTask.description}\n");
-                            amount++;
-                        }
-                    }
-                    else
-                    {
-                        Checklist.ShowTask(task, i + 1);
-                        // Console.WriteLine($"[{task.done}]\t\t{task.description}\n");
-                        amount++;
-                    }
+                    ShowSubTask(task.subTask, i + 1);
                 }
-                Console.ResetColor();
-                Console.WriteLine($"\nWOW! DU HAR UTFÖRT {amount} UPPGIFTER!");
-
             }
+            Console.ResetColor();
+            Console.WriteLine($"\nWOW! DU HAR UTFÖRT {amount} UPPGIFTER!");
         }
     }
 }
