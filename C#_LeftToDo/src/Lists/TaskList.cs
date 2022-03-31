@@ -25,13 +25,13 @@ namespace LeftToDo
         }
 
         // Adds new Task to ToDo
-        public void AddToDoList(Task task)
+        public void AddToDoTask(Task task)
         {
             ToDoList.Add(task);
         }
 
         // Adds Task that should be archived to Arc
-        private void AddToArcList(Task task)
+        private void AddTaskToArhive(Task task)
         {
             Archive.Add(task);
         }
@@ -39,14 +39,12 @@ namespace LeftToDo
         // Iterates thru ToDo to find done Task to archive
         public void ArchiveTask()
         {
-            for (int i = 0; i < ToDoList.Count; i++)
+            foreach (var task in ToDoList)
             {
-                Task item = ToDoList[i];
-                if (item.done == true)
+                if (task.done == true)
                 {
-                    AddToArcList(item);
-                    ToDoList.Remove(item);
-                    i--;
+                    AddTaskToArhive(task);
+                    ToDoList.Remove(task);
                 }
             }
         }
@@ -58,64 +56,62 @@ namespace LeftToDo
             if (ToDo.Count < 1)
             {
                 Console.WriteLine($"\n\nATT GÖRA LISTAN ÄR TOM!\n\n");
+                return;
             }
-            else
+            Console.WriteLine($"Status\tNr.\tUppgift\n");
+
+            for (int i = 0; i < ToDo.Count; i++)
             {
-                Console.WriteLine($"Status\tNr.\tUppgift\n");
+                Console.ResetColor();
+                var item = ToDo[i];
+                var index = i + 1;
 
-                for (int i = 0; i < ToDo.Count; i++)
+                if (!item.done)
                 {
-                    Console.ResetColor();
-                    var item = ToDo[i];
-                    var index = i + 1;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else if (item.done)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
 
-                    if (item.done == false)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    }
-                    else if (item.done != false)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                    }
-
-                    if (item.type == "S")
-                    {
-                        SimpleTask.ShowTask(item, index);
-                    }
-                    else if (item.type == "C")
-                    {
-                        Checklist.ShowTask(item, index);
-                        ShowSubTask(item.subTask, index);
-                    }
-                    else if (item.type == "D")
-                    {
-                        Deadline.ShowTask(item, index);
-                    }
+                if (item.type == "S")
+                {
+                    SimpleTask.ShowTask(item, index);
+                }
+                else if (item.type == "C")
+                {
+                    Checklist.ShowTask(item, index);
+                    ShowSubTask(item.subTask, index);
+                }
+                else if (item.type == "D")
+                {
+                    Deadline.ShowTask(item, index);
                 }
             }
             Console.ResetColor();
         }
 
         // Display Checklist Task
-        private void ShowSubTask(List<SimpleTask> subList, int checkIndex)
+        private void ShowSubTask(List<SimpleTask> subList, int outer)
         {
             for (int i = 0; i < subList.Count; i++)
             {
                 Console.ResetColor();
-                var taskIndex = i + 1;
+                var inner = i + 1;
 
                 var item = subList[i];
 
-                if (item.done == false)
+                if (!item.done)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                 }
-                else if (item.done != false)
+                else if (item.done)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                 }
 
-                SimpleTask.ShowTask(item, checkIndex, taskIndex);
+                SimpleTask.ShowTask(item, outer, inner);
             }
             Console.ResetColor();
         }

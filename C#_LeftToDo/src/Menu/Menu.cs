@@ -5,14 +5,8 @@ namespace LeftToDo
     // Menu handles out- / input 
     abstract class Menu
     {
-        // Instructions to user
-        private static void ShowIntro()
-        {
-            Console.WriteLine("Välj i menyn nedan, ange siffran inom [] och tryck enter.\n");
-        }
-
         // Mainmenu, handle user input with switch statement
-        internal static void ShowMain(TaskList list)
+        internal static void ShowMainMenu(TaskList list)
         {
             Console.Clear();
             ShowIntro();
@@ -28,17 +22,24 @@ namespace LeftToDo
                     break;
                 case "2":
                     list.ShowArchive(list.Archive);
-                    ShowArcMenu(list);
+                    ShowArchiveMenu(list);
                     break;
                 case "0":
                     ShowFarewell();
                     break;
                 default:
-                    ShowError();
-                    ShowMain(list);
+                    ShowErrorMsg();
+                    ShowMainMenu(list);
                     break;
             }
         }
+
+        // Instructions to user
+        private static void ShowIntro()
+        {
+            Console.WriteLine("Välj i menyn nedan, ange siffran inom [] och tryck enter.\n");
+        }
+
 
         // List menu, handle user input with switch statement
         private static void ShowToDoMenu(TaskList list)
@@ -73,11 +74,11 @@ namespace LeftToDo
 
                 case "0":
                     Console.Clear();
-                    ShowMain(list);
+                    ShowMainMenu(list);
                     break;
 
                 default:
-                    ShowError();
+                    ShowErrorMsg();
                     break;
             }
         }
@@ -102,7 +103,7 @@ namespace LeftToDo
                 case "1":
                     var simpelTask = new SimpleTask("");
                     simpelTask.Create();
-                    list.AddToDoList(simpelTask);
+                    list.AddToDoTask(simpelTask);
                     list.ShowLeftToDo(list.ToDoList);
                     ShowToDoMenu(list);
                     break;
@@ -110,7 +111,7 @@ namespace LeftToDo
                 case "2":
                     var deadline = new Deadline("", 0);
                     deadline.Create();
-                    list.AddToDoList(deadline);
+                    list.AddToDoTask(deadline);
                     list.ShowLeftToDo(list.ToDoList);
                     ShowToDoMenu(list);
                     break;
@@ -118,32 +119,32 @@ namespace LeftToDo
                 case "3":
                     var checklist = new Checklist("");
                     checklist.Create();
-                    list.AddToDoList(checklist);
+                    list.AddToDoTask(checklist);
                     list.ShowLeftToDo(list.ToDoList);
                     ShowToDoMenu(list);
                     break;
 
                 case "0":
                     Console.Clear();
-                    ShowMain(list);
+                    ShowMainMenu(list);
                     break;
 
                 default:
-                    ShowError();
+                    ShowErrorMsg();
                     break;
             }
 
         }
 
         // Archive menu, lets user return to Mainmenu
-        private static void ShowArcMenu(TaskList list)
+        private static void ShowArchiveMenu(TaskList list)
         {
             Console.WriteLine("\n[0] HUVUDMENY\n\n");
             var input = Console.ReadLine();
             if (input == "0")
             {
                 Console.Clear();
-                ShowMain(list);
+                ShowMainMenu(list);
             }
         }
 
@@ -155,7 +156,7 @@ namespace LeftToDo
         }
 
         // Error message
-        private static void ShowError()
+        private static void ShowErrorMsg()
         {
             Console.WriteLine("\nOgiltligt val. Vargod försök igen!");
         }

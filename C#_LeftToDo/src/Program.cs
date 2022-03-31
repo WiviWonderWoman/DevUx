@@ -11,7 +11,7 @@ namespace LeftToDo
 
             TaskList list = new TaskList();
 
-            Menu.ShowMain(list);
+            Menu.ShowMainMenu(list);
         }
     }
 }

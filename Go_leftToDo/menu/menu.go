@@ -7,42 +7,34 @@ import (
 	"github.com/WiviWonderWoman/DevUx/Go/tasks"
 )
 
-type Menu struct {
-}
-
-func NewMenu() (Menu, error) {
-	return Menu{}, nil
-}
-
-func intro() {
-	fmt.Println("Välj i menyn nedan, ange siffran inom [] och tryck enter.")
-}
-
-func (m Menu) Main(list lists.TaskList) {
+func ShowMainMenu(list lists.TaskList) {
 	fmt.Println("MAIN menyn", list)
 	//TODO: clear console
-	intro()
+	showIntro()
 	fmt.Println("\nHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta")
-
 	//TODO: read input from console
 	input := 0
 	switch input {
 	case 1:
 		list.ShowLeftToDo()
-		m.todo(list)
+		showToDoMenu(list)
 	case 2:
 		list.ShowArchive()
-		m.archive(list)
+		showArchiveMenu(list)
 	case 3:
-		m.farewell()
+		showFarewell()
 	default:
-		m.errorMsg()
-		m.Main(list)
+		ShowErrorMsg()
+		ShowMainMenu(list)
 	}
 }
 
-func (m Menu) todo(list lists.TaskList) {
-	intro()
+func showIntro() {
+	fmt.Println("Välj i menyn nedan, ange siffran inom [] och tryck enter.")
+}
+
+func showToDoMenu(list lists.TaskList) {
+	showIntro()
 	fmt.Println(
 		"\nUNDERMENY: Vad vill du göra?\n" +
 			"[1] Lägg till uppgift\n" +
@@ -50,28 +42,27 @@ func (m Menu) todo(list lists.TaskList) {
 			"[3] Arkivera utförda uppgifter\n" +
 			"[0] HUVUDMENY",
 	)
-
 	//TODO: read input from console
 	input := 0
 	switch input {
 	case 1:
-		m.task(list)
+		showTaskMenu(list)
 	case 2:
-		list.FindTask()
-		m.todo(list)
+		list.FindTaskToMark()
+		showToDoMenu(list)
 	case 3:
 		list.ArchiveTask()
 		list.ShowLeftToDo()
-		m.todo(list)
+		showToDoMenu(list)
 	case 0:
 		//TODO: Console.Clear();
-		m.Main(list)
+		ShowMainMenu(list)
 	}
 }
 
-func (m Menu) task(list lists.TaskList) {
+func showTaskMenu(list lists.TaskList) {
 	list.ShowLeftToDo()
-	intro()
+	showIntro()
 
 	fmt.Println(
 		"\nUPPGIFTSMENY. Välj typ av uppgift:\n" +
@@ -84,47 +75,45 @@ func (m Menu) task(list lists.TaskList) {
 	input := 0
 	switch input {
 	case 1:
-
 		simple := tasks.Task{}
 		simple.Create("S")
 		list.AddToDoTask(simple)
 		list.ShowLeftToDo()
-		m.todo(list)
+		showToDoMenu(list)
 	case 2:
 		deadline := tasks.Task{}
 		deadline.Create("D")
 		list.AddToDoTask(deadline)
 		list.ShowLeftToDo()
-		m.todo(list)
+		showToDoMenu(list)
 	case 3:
 		checklist := tasks.Task{}
 		checklist.Create("C")
 		list.AddToDoTask(checklist)
 		list.ShowLeftToDo()
-		m.todo(list)
+		showToDoMenu(list)
 	case 0:
 		//TODO: Console.Clear();
-		m.Main(list)
+		ShowMainMenu(list)
 	default:
-		m.errorMsg()
-
+		ShowErrorMsg()
 	}
 }
 
-func (m Menu) archive(list lists.TaskList) {
+func showArchiveMenu(list lists.TaskList) {
 	fmt.Println("\n[0] HUVUDMENY")
 	//TODO: read input from console
 	input := 0
 	if input == 0 {
 		//TODO: Console.Clear();
-		m.Main(list)
+		ShowMainMenu(list)
 	}
 }
 
-func (m Menu) farewell() {
+func showFarewell() {
 	fmt.Println("Tack för besöket och välkommen åter!")
 }
 
-func (m Menu) errorMsg() {
+func ShowErrorMsg() {
 	fmt.Println("\nOgiltligt val. Vargod försök igen!")
 }
