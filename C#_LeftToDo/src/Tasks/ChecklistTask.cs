@@ -12,7 +12,6 @@ namespace LeftToDo
             type = "C";
             description = specification;
             subTask = new List<SimpleTask>();
-            daysLeft = 0;
         }
 
         // Takes info from user

@@ -84,10 +84,6 @@ namespace LeftToDo
                     Checklist.ShowTask(item, index);
                     ShowSubTask(item.subTask, index);
                 }
-                else if (item.type == "D")
-                {
-                    Deadline.ShowTask(item, index);
-                }
             }
             Console.ResetColor();
         }

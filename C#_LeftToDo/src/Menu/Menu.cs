@@ -91,8 +91,7 @@ namespace LeftToDo
             Console.WriteLine(
                 "\n\nUPPGIFTSMENY. Välj typ av uppgift:\n" +
                 "[1] Enkel uppgift\n" +
-                "[2] Deadline\n" +
-                "[3] Checklista\n" +
+                "[2] Checklista\n" +
                 "[0] HUVUDMENY\n\n"
             );
 
@@ -109,14 +108,6 @@ namespace LeftToDo
                     break;
 
                 case "2":
-                    var deadline = new Deadline("", 0);
-                    deadline.Create();
-                    list.AddToDoTask(deadline);
-                    list.ShowLeftToDo(list.ToDoList);
-                    ShowToDoMenu(list);
-                    break;
-
-                case "3":
                     var checklist = new Checklist("");
                     checklist.Create();
                     list.AddToDoTask(checklist);

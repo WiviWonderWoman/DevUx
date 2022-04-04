@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace LeftToDo
 {
+    //TODO: Combine Task & SimpleTask
     // Abstract super class, handles all types of Task
     public abstract class Task
     {
@@ -16,11 +17,6 @@ namespace LeftToDo
             set;
         }
         public bool done
-        {
-            get;
-            set;
-        }
-        public int daysLeft
         {
             get;
             set;

@@ -9,7 +9,6 @@ namespace LeftToDo
         {
             type = "S";
             description = specification;
-            daysLeft = 0;
         }
 
         // Displaying simple Task
