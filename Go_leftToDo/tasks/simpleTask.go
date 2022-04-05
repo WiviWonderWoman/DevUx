@@ -15,9 +15,12 @@ func NewSimpleTask(description string) *SimpleTask {
 	}
 }
 
-func (s SimpleTask) Create() {
-	fmt.Println("Ange uppgift:")
-	//TODO: read input from console
-	input := ""
-	s.Description = input
+func (s SimpleTask) Create() *SimpleTask {
+	fmt.Printf("\nAnge uppgift:\n")
+	var input string
+	fmt.Scanln(&input)
+	fmt.Printf("Du angav uppgift: %s\n", input)
+	simple := NewSimpleTask(input)
+	// s.Task.Description = input
+	return simple
 }

@@ -10,9 +10,11 @@ import (
 func ShowMainMenu(list lists.TaskList) {
 	//TODO: clear console
 	showIntro()
-	fmt.Println("\nHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta")
+	fmt.Printf("\nHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta\n")
 	//TODO: read input from console
-	input := "1"
+	var input string
+	fmt.Scanln(&input)
+	// fmt.Printf("Du tryckte: %s i HUVUDMENYN", input)
 	switch input {
 	case "1":
 		list.ShowLeftToDo()
@@ -20,7 +22,7 @@ func ShowMainMenu(list lists.TaskList) {
 	case "2":
 		list.ShowArchive()
 		showArchiveMenu(list)
-	case "3":
+	case "0":
 		showFarewell()
 	default:
 		ShowErrorMsg()
@@ -34,15 +36,16 @@ func showIntro() {
 
 func showToDoMenu(list lists.TaskList) {
 	showIntro()
-	fmt.Println(
+	fmt.Printf(
 		"\nUNDERMENY: Vad vill du göra?\n" +
 			"[1] Lägg till uppgift\n" +
 			"[2] Markera / avmarkera uppgift\n" +
 			"[3] Arkivera utförda uppgifter\n" +
-			"[0] HUVUDMENY",
+			"[0] HUVUDMENY\n",
 	)
-	//TODO: read input from console
-	input := ""
+	var input string
+	fmt.Scanln(&input)
+	// fmt.Printf("Du tryckte: %s i UNDERMENYN", input)
 	switch input {
 	case "1":
 		showTaskMenu(list)
@@ -64,20 +67,21 @@ func showToDoMenu(list lists.TaskList) {
 func showTaskMenu(list lists.TaskList) {
 	list.ShowLeftToDo()
 	showIntro()
-
 	fmt.Println(
 		"\nUPPGIFTSMENY. Välj typ av uppgift:\n" +
 			"[1] Enkel uppgift\n" +
 			"[2] Checklista\n" +
 			"[0] HUVUDMENY",
 	)
-	//TODO: read input from console
-	input := ""
+	var input string
+	fmt.Scanln(&input)
+	// fmt.Printf("Du tryckte: %s i UPPGIFTSMENYN", input)
 	switch input {
 	case "1":
-		simple := tasks.NewSimpleTask("")
-		simple.Create()
+		s := tasks.SimpleTask{}
+		simple := s.Create()
 		list.AddToDoTask(simple.Task)
+		fmt.Println("LISTAN: ", list)
 		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case "2":
@@ -95,9 +99,10 @@ func showTaskMenu(list lists.TaskList) {
 }
 
 func showArchiveMenu(list lists.TaskList) {
-	fmt.Println("\n[0] HUVUDMENY")
-	//TODO: read input from console
-	input := ""
+	fmt.Printf("\n[0] HUVUDMENY\n")
+	var input string
+	fmt.Scanln(&input)
+	fmt.Printf("Du tryckte: %s i ARKIVET", input)
 	if input == "0" {
 		//TODO: clear console
 		ShowMainMenu(list)
@@ -105,9 +110,9 @@ func showArchiveMenu(list lists.TaskList) {
 }
 
 func showFarewell() {
-	fmt.Println("Tack för besöket och välkommen åter!")
+	fmt.Printf("\nTack för besöket och välkommen åter!\n")
 }
 
 func ShowErrorMsg() {
-	fmt.Println("\nOgiltligt val. Vargod försök igen!")
+	fmt.Printf("\nOgiltligt val. Vargod försök igen!\n")
 }
