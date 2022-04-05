@@ -41,7 +41,7 @@ namespace LeftToDo
         {
             foreach (var task in ToDoList)
             {
-                if (task.done )
+                if (task.done)
                 {
                     AddTaskToArhive(task);
                     ToDoList.Remove(task);
@@ -52,7 +52,7 @@ namespace LeftToDo
         // Display List of Task 
         internal void ShowLeftToDo(List<Task> ToDo)
         {
-            Console.Clear();
+            // FIXME: Console.Clear();
             if (ToDo.Count < 1)
             {
                 Console.WriteLine($"\n\nATT GÖRA LISTAN ÄR TOM!\n\n");
@@ -62,17 +62,17 @@ namespace LeftToDo
 
             for (int i = 0; i < ToDo.Count; i++)
             {
-                Console.ResetColor();
+                // FIXME: Console.ResetColor();
                 var item = ToDo[i];
                 var index = i + 1;
 
                 if (!item.done)
                 {
-                    // Console.ForegroundColor = ConsoleColor.Red;
+                    // FIXME: Console.ForegroundColor = ConsoleColor.Red;
                 }
                 else if (item.done)
                 {
-                    // Console.ForegroundColor = ConsoleColor.Yellow;
+                    // FIXME: Console.ForegroundColor = ConsoleColor.Yellow;
                 }
 
                 if (item.type == "S")
@@ -85,32 +85,8 @@ namespace LeftToDo
                     // ShowSubTask(item.subTask, index);
                 }
             }
-            // Console.ResetColor();
+            // FIXME: Console.ResetColor();
         }
-
-        // Display Checklist Task
-        // private void ShowSubTask(List<SimpleTask> subList, int outer)
-        // {
-        //     for (int i = 0; i < subList.Count; i++)
-        //     {
-        //         // Console.ResetColor();
-        //         var inner = i + 1;
-
-        //         var item = subList[i];
-
-        //         if (!item.done)
-        //         {
-        //             // Console.ForegroundColor = ConsoleColor.Red;
-        //         }
-        //         else if (item.done)
-        //         {
-        //             // Console.ForegroundColor = ConsoleColor.Yellow;
-        //         }
-
-        //         SimpleTask.ShowTask(item, outer, inner);
-        //     }
-        //     // Console.ResetColor();
-        // }
 
         // Find task to mark as done / undone
         internal void FindTaskToMark(TaskList list)
@@ -172,14 +148,14 @@ namespace LeftToDo
         // Display archived Task
         internal void ShowArchive(List<Task> Arc)
         {
-            Console.Clear();
+            // FIXME: Console.Clear();
             if (Arc.Count < 1)
             {
                 Console.WriteLine($"\n\nARKIVET ÄR TOMT.\n\n");
                 return;
             }
             Console.WriteLine($"UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift\n");
-            // Console.ForegroundColor = ConsoleColor.Green;
+            // FIXME: Console.ForegroundColor = ConsoleColor.Green;
 
             int amount = 0;
             for (int i = 0; i < Arc.Count; i++)
@@ -190,14 +166,13 @@ namespace LeftToDo
                 if (task.type == "C")
                 {
                     Checklist.ShowTask(task, i + 1);
-                    // ShowSubTask(task.subTask, i + 1);
                 }
-                else
+                else if (task.type == "S")
                 {
                     SimpleTask.ShowTask(task, i + 1);
                 }
             }
-            // Console.ResetColor();
+            // FIXME: Console.ResetColor();
             Console.WriteLine($"\nWOW! DU HAR UTFÖRT {amount} UPPGIFTER!");
         }
     }

@@ -8,7 +8,7 @@ namespace LeftToDo
         // Mainmenu, handle user input with switch statement
         internal static void ShowMainMenu(TaskList list)
         {
-            Console.Clear();
+            // FIXME: Console.Clear();
             ShowIntro();
             Console.WriteLine("HUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta");
 
@@ -73,7 +73,7 @@ namespace LeftToDo
                     break;
 
                 case "0":
-                    Console.Clear();
+                    // FIXME: Console.Clear();
                     ShowMainMenu(list);
                     break;
 
@@ -116,7 +116,7 @@ namespace LeftToDo
                     break;
 
                 case "0":
-                    Console.Clear();
+                    // FIXME: Console.Clear();
                     ShowMainMenu(list);
                     break;
 
@@ -134,7 +134,7 @@ namespace LeftToDo
             var input = Console.ReadLine();
             if (input == "0")
             {
-                Console.Clear();
+                // FIXME: Console.Clear();
                 ShowMainMenu(list);
             }
         }

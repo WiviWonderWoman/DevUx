@@ -11,16 +11,16 @@ func ShowMainMenu(list lists.TaskList) {
 	//TODO: clear console
 	showIntro()
 	fmt.Printf("\nHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta\n")
-	//TODO: read input from console
+
 	var input string
 	fmt.Scanln(&input)
-	// fmt.Printf("Du tryckte: %s i HUVUDMENYN", input)
+
 	switch input {
 	case "1":
-		list.ShowLeftToDo()
+		lists.ShowLeftToDo(list.ToDoList)
 		showToDoMenu(list)
 	case "2":
-		list.ShowArchive()
+		lists.ShowArchive(list.Archive)
 		showArchiveMenu(list)
 	case "0":
 		showFarewell()
@@ -45,16 +45,16 @@ func showToDoMenu(list lists.TaskList) {
 	)
 	var input string
 	fmt.Scanln(&input)
-	// fmt.Printf("Du tryckte: %s i UNDERMENYN", input)
+
 	switch input {
 	case "1":
 		showTaskMenu(list)
 	case "2":
-		list.FindTaskToMark()
+		lists.FindTaskToMark(list.ToDoList)
 		showToDoMenu(list)
 	case "3":
-		list.ArchiveTask()
-		list.ShowLeftToDo()
+		lists.ArchiveTask(list)
+		lists.ShowLeftToDo(list.ToDoList)
 		showToDoMenu(list)
 	case "0":
 		//TODO: clear console
@@ -65,7 +65,7 @@ func showToDoMenu(list lists.TaskList) {
 }
 
 func showTaskMenu(list lists.TaskList) {
-	list.ShowLeftToDo()
+	lists.ShowLeftToDo(list.ToDoList)
 	showIntro()
 	fmt.Println(
 		"\nUPPGIFTSMENY. Välj typ av uppgift:\n" +
@@ -75,20 +75,19 @@ func showTaskMenu(list lists.TaskList) {
 	)
 	var input string
 	fmt.Scanln(&input)
-	// fmt.Printf("Du tryckte: %s i UPPGIFTSMENYN", input)
+
 	switch input {
 	case "1":
-		s := tasks.SimpleTask{}
-		simple := s.Create()
-		list.AddToDoTask(simple.Task)
-		fmt.Println("LISTAN: ", list)
-		list.ShowLeftToDo()
+		simple := tasks.SimpleTask{}.Create()
+		list.ToDoList = lists.AddToDoTask(list.ToDoList, simple.Task)
+		// fmt.Println("LISTAN: ", list.ToDoList)
+		lists.ShowLeftToDo(list.ToDoList)
 		showToDoMenu(list)
 	case "2":
-		checklist := tasks.NewChecklistTask("")
-		checklist.Create()
-		list.AddToDoTask(checklist.Task)
-		list.ShowLeftToDo()
+		checklist := tasks.ChecklistTask{}.Create()
+		list.ToDoList = lists.AddToDoTask(list.ToDoList, checklist.Task)
+		// fmt.Println("LISTAN: ", list.ToDoList)
+		lists.ShowLeftToDo(list.ToDoList)
 		showToDoMenu(list)
 	case "0":
 		//TODO: clear console
