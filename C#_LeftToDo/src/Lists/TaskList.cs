@@ -41,7 +41,7 @@ namespace LeftToDo
         {
             foreach (var task in ToDoList)
             {
-                if (task.done == true)
+                if (task.done )
                 {
                     AddTaskToArhive(task);
                     ToDoList.Remove(task);

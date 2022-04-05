@@ -4,7 +4,6 @@ import "fmt"
 
 type ChecklistTask struct {
 	Task
-	// tr TaskRepository
 }
 
 func NewChecklistTask(description string) *ChecklistTask {
@@ -36,3 +35,16 @@ func (c ChecklistTask) Create() {
 		c.SubTask = append(c.SubTask, *sub)
 	}
 }
+
+// func (c ChecklistTask) ShowTask(outer int) {
+// 	if !c.Done {
+// 		fmt.Println("[ ]\t", outer, "\t", c.Description)
+// 		return
+// 	}
+// 	fmt.Println("[X]\t", outer, "\t", c.Description)
+// 	inner := 0
+// 	for _, sub := range c.SubTask {
+// 		inner++
+// 		sub.ShowSubTask(outer, inner)
+// 	}
+// }

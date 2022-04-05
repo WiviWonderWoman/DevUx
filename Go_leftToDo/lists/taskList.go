@@ -56,11 +56,10 @@ func (tdl TaskList) ShowLeftToDo() {
 			//TODO: set console color to yellow
 		}
 
-		if task.TaskType == "S" {
-			task.ShowTask(index)
-		} else if task.TaskType == "C" {
-			task.ShowTask(index)
-			task.ShowSubTask(task.SubTask, index)
+		task.ShowTask(index)
+
+		if task.TaskType == "C" {
+			task.ShowSubTask(index)
 		}
 	}
 	//TODO: reset console color
@@ -144,7 +143,7 @@ func (tdl TaskList) ShowArchive() {
 		task.ShowTask(i + 1)
 
 		if task.TaskType == "C" {
-			task.ShowSubTask(task.SubTask, i+1)
+			task.ShowSubTask(i + 1)
 		}
 	}
 	//TO-DO: Console.ResetColor();

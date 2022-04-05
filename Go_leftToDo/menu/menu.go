@@ -8,20 +8,19 @@ import (
 )
 
 func ShowMainMenu(list lists.TaskList) {
-	fmt.Println("MAIN menyn", list)
 	//TODO: clear console
 	showIntro()
 	fmt.Println("\nHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta")
 	//TODO: read input from console
-	input := 0
+	input := "1"
 	switch input {
-	case 1:
+	case "1":
 		list.ShowLeftToDo()
 		showToDoMenu(list)
-	case 2:
+	case "2":
 		list.ShowArchive()
 		showArchiveMenu(list)
-	case 3:
+	case "3":
 		showFarewell()
 	default:
 		ShowErrorMsg()
@@ -30,7 +29,7 @@ func ShowMainMenu(list lists.TaskList) {
 }
 
 func showIntro() {
-	fmt.Println("Välj i menyn nedan, ange siffran inom [] och tryck enter.")
+	fmt.Println("\nVälj i menyn nedan, ange siffran inom [] och tryck enter.")
 }
 
 func showToDoMenu(list lists.TaskList) {
@@ -43,20 +42,22 @@ func showToDoMenu(list lists.TaskList) {
 			"[0] HUVUDMENY",
 	)
 	//TODO: read input from console
-	input := 0
+	input := ""
 	switch input {
-	case 1:
+	case "1":
 		showTaskMenu(list)
-	case 2:
+	case "2":
 		list.FindTaskToMark()
 		showToDoMenu(list)
-	case 3:
+	case "3":
 		list.ArchiveTask()
 		list.ShowLeftToDo()
 		showToDoMenu(list)
-	case 0:
+	case "0":
 		//TODO: clear console
 		ShowMainMenu(list)
+	default:
+		ShowErrorMsg()
 	}
 }
 
@@ -71,21 +72,21 @@ func showTaskMenu(list lists.TaskList) {
 			"[0] HUVUDMENY",
 	)
 	//TODO: read input from console
-	input := 0
+	input := ""
 	switch input {
-	case 1:
+	case "1":
 		simple := tasks.NewSimpleTask("")
 		simple.Create()
-		list.AddToDoTask(*simple)
+		list.AddToDoTask(simple.Task)
 		list.ShowLeftToDo()
 		showToDoMenu(list)
-	case 2:
+	case "2":
 		checklist := tasks.NewChecklistTask("")
 		checklist.Create()
-		list.AddToDoTask(*checklist)
+		list.AddToDoTask(checklist.Task)
 		list.ShowLeftToDo()
 		showToDoMenu(list)
-	case 0:
+	case "0":
 		//TODO: clear console
 		ShowMainMenu(list)
 	default:
@@ -96,8 +97,8 @@ func showTaskMenu(list lists.TaskList) {
 func showArchiveMenu(list lists.TaskList) {
 	fmt.Println("\n[0] HUVUDMENY")
 	//TODO: read input from console
-	input := 0
-	if input == 0 {
+	input := ""
+	if input == "0" {
 		//TODO: clear console
 		ShowMainMenu(list)
 	}

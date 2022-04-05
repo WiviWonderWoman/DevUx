@@ -11,10 +11,10 @@ type Task struct {
 }
 
 type TaskRepository interface {
-	ShowTask(task Task, index int)
-	ShowSubTask(subTask []Task, outerIndex int, innerIndex int)
+	ShowTask(index int)
+	ShowSubTask(index int)
 	MarkAsDone()
-	Create() string
+	Create()
 }
 
 func (t Task) ShowTask(index int) {
@@ -25,61 +25,18 @@ func (t Task) ShowTask(index int) {
 	}
 }
 
-func (t Task) ShowSubTask(subTask []SimpleTask, outerIndex int) {
-	innerIndex := 0
-	for _, sub := range subTask {
-		innerIndex++
+func (t Task) ShowSubTask(outer int) {
+	inner := 0
+	for _, sub := range t.SubTask {
+		inner++
 		if !t.Done {
-			fmt.Println("[ ]\t", outerIndex, " - ", innerIndex, "\t", sub.Description)
-		} else {
-			fmt.Println("[X]\t", outerIndex, " - ", innerIndex, "\t", sub.Description)
+			fmt.Println("[ ]\t", outer, " - ", inner, "\t", sub.Description)
+			return
 		}
+		fmt.Println("[X]\t", outer, " - ", inner, "\t", sub.Description)
 	}
 }
 
 func (t Task) MarkAsDone() {
 	t.Done = !t.Done
 }
-
-/*
-
-
-
-
-
-
- */
-// func (tw *TaskWrapper) SetSinmpleTask(desc string, days int, subTasks []SimpleTask) (SimpleTask, error) {
-// 	return tw.SimpleTask.SetSinmpleTask(desc, days, subTasks)
-// }
-// func (s SimpleTask) SetSinmpleTask(desc string, days int, subTasks []SimpleTask) (SimpleTask, error) {
-
-// 	s.TaskType = "S"
-// 	s.Description = desc
-// 	s.Done = false
-
-// 	return s, nil
-// }
-
-//____________________________________________________
-// func (t Task) Create() (Task, error) {
-// 	fmt.Println("Ange uppgift:")
-// 	input := "" // TO-DO: read input
-// 	t.Description = input
-// 	inputInt := 0 // TO-DO: read input
-// 	fmt.Println("Ange dagar till deadline:")
-// 	t.DaysLeft = inputInt
-// 	return t, nil
-// }
-
-// func (t Task) ShowSubTask(task Task, outer int, inner int) {
-// 	if task.Done == false {
-// 		fmt.Println("[ ]\t", outer, " - ", inner, "\t", task.Description)
-// 	} else {
-// 		fmt.Println("[X]\t", outer, " - ", inner, "\t", task.Description)
-// 	}
-// }
-
-// func (t Task) MarkAsDone() {
-// 	t.Done = !t.Done
-// }

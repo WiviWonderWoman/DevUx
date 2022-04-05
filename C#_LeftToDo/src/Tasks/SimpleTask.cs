@@ -17,26 +17,21 @@ namespace LeftToDo
             if (!task.done)
             {
                 Console.WriteLine($"[ ]\t{index}\t{task.description}");
+                return;
             }
-            else
-            {
-                Console.WriteLine($"[X]\t{index}\t{task.description}");
-            }
+            Console.WriteLine($"[X]\t{index}\t{task.description}");
         }
 
         // Overload, Displaying simple Task in Checklist
-        // internal static void ShowTask(Task task, int outer, int inner)
-        // {
-        //     if (!task.done)
-        //     {
-        //         Console.WriteLine($"\t[ ]\t{outer} - {inner}\t{task.description}");
-        //     }
-        //     else
-        //     {
-        //         Console.WriteLine($"\t[X]\t{outer} - {inner}\t{task.description}");
-        //     }
-
-        // }
+        internal static void ShowTask(Task task, int outer, int inner)
+        {
+            if (!task.done)
+            {
+                Console.WriteLine($"\t[ ]\t{outer} - {inner}\t{task.description}");
+                return;
+            }
+            Console.WriteLine($"\t[X]\t{outer} - {inner}\t{task.description}");
+        }
 
         // Takes info from user
         internal override void Create()

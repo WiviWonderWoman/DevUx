@@ -20,5 +20,4 @@ func (s SimpleTask) Create() {
 	//TODO: read input from console
 	input := ""
 	s.Description = input
-
 }
