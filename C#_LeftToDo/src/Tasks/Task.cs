@@ -27,15 +27,7 @@ namespace LeftToDo
         // Marks task as Done
         public void MarkAsDone()
         {
-            if (done == false)
-            {
-                done = true;
-            }
-            else if (done == false)
-            {
-                done = true;
-            }
-
+            done = !done;
         }
 
         // Takes info from user, overrides in each subclass

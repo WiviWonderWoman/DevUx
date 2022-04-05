@@ -1,25 +1,44 @@
 package tasks
 
-// type Task struct {
-// 	TaskType    string
-// 	Description string
-// 	Done        bool
-// 	DaysLeft    int
-// 	SubTask     []Task
-// }
+import "fmt"
 
-type TaskWrapper struct {
-	SimpleTask    SimpleTask
-	DeadlineTask  DeadlineTask
-	ChecklistTask ChecklistTask
+type Task struct {
+	TaskType    string
+	Description string
+	Done        bool
+	DaysLeft    int
+	SubTask     []SimpleTask
 }
 
 type TaskRepository interface {
-	// SetTask(desc string, days int, subTasks []SimpleTask) (TaskWrapper, error)
-	Create() (TaskWrapper, error)
-	ShowTask(task TaskWrapper, index int)
-	ShowSubTask(task TaskWrapper, outer int, inner int)
+	ShowTask(task Task, index int)
+	ShowSubTask(subTask []Task, outerIndex int, innerIndex int)
 	MarkAsDone()
+	Create() string
+}
+
+func (t Task) ShowTask(index int) {
+	if !t.Done {
+		fmt.Println("[ ]\t", index, "\t", t.Description)
+	} else {
+		fmt.Println("[X]\t", index, "\t", t.Description)
+	}
+}
+
+func (t Task) ShowSubTask(subTask []SimpleTask, outerIndex int) {
+	innerIndex := 0
+	for _, sub := range subTask {
+		innerIndex++
+		if !t.Done {
+			fmt.Println("[ ]\t", outerIndex, " - ", innerIndex, "\t", sub.Description)
+		} else {
+			fmt.Println("[X]\t", outerIndex, " - ", innerIndex, "\t", sub.Description)
+		}
+	}
+}
+
+func (t Task) MarkAsDone() {
+	t.Done = !t.Done
 }
 
 /*
@@ -51,14 +70,6 @@ type TaskRepository interface {
 // 	fmt.Println("Ange dagar till deadline:")
 // 	t.DaysLeft = inputInt
 // 	return t, nil
-// }
-
-// func (t Task) ShowTask(task Task, index int) {
-// 	if task.Done == false {
-// 		fmt.Println("[ ]\t", index, "\t", task.Description)
-// 	} else {
-// 		fmt.Println("[X]\t", index, "\t", task.Description)
-// 	}
 // }
 
 // func (t Task) ShowSubTask(task Task, outer int, inner int) {

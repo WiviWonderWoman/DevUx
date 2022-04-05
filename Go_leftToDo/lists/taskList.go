@@ -7,22 +7,22 @@ import (
 )
 
 type TaskList struct {
-	ToDoList []tasks.TaskWrapper
-	Archive  []tasks.TaskWrapper
+	ToDoList []tasks.Task
+	Archive  []tasks.Task
 }
 
 func NewTaskList() TaskList {
 	return TaskList{
-		ToDoList: []tasks.TaskWrapper{},
-		Archive:  []tasks.TaskWrapper{},
+		ToDoList: []tasks.Task{},
+		Archive:  []tasks.Task{},
 	}
 }
 
-func (tdl TaskList) AddToDoTask(task tasks.TaskWrapper) {
+func (tdl TaskList) AddToDoTask(task tasks.Task) {
 	tdl.ToDoList = append(tdl.ToDoList, task)
 }
 
-func (tdl TaskList) addTaskToArhive(task tasks.TaskWrapper) {
+func (tdl TaskList) addTaskToArhive(task tasks.Task) {
 	tdl.Archive = append(tdl.Archive, task)
 }
 
@@ -38,7 +38,7 @@ func (tdl TaskList) ArchiveTask() {
 }
 
 func (tdl TaskList) ShowLeftToDo() {
-	//To-Do: Console.Clear();
+	//TODO: clear console
 	if len(tdl.ToDoList) < 1 {
 		fmt.Println("\n\nATT GÖRA LISTAN ÄR TOM!")
 		return
@@ -47,43 +47,40 @@ func (tdl TaskList) ShowLeftToDo() {
 	fmt.Println("Status\tNr.\tUppgift")
 	index := 0
 	for _, task := range tdl.ToDoList {
-		//To-Do: Console.ResetColor();
+		//TODO: reset console color
 		index++
 
 		if !task.Done {
-			//To-Do: Console.ForegroundColor = ConsoleColor.Red;
+			//TODO: set console color to red
 		} else if task.Done {
-			//To-Do: Console.ForegroundColor = ConsoleColor.Yellow;
+			//TODO: set console color to yellow
 		}
 
 		if task.TaskType == "S" {
-			task.ShowTask(task, index)
+			task.ShowTask(index)
 		} else if task.TaskType == "C" {
-			task.ShowTask(task, index)
-			showSubTask(task.SubTask, index)
-		} else if task.TaskType == "D" {
-			task.ShowTask(task, index)
+			task.ShowTask(index)
+			task.ShowSubTask(task.SubTask, index)
 		}
 	}
-
-	//To-Do: Console.ResetColor();
+	//TODO: reset console color
 }
 
-func showSubTask(sub []tasks.Task, outer int) {
-	inner := 0
-	for _, subTask := range sub {
-		//To-Do: Console.ResetColor();
-		inner++
+// func showSubTask(sub []tasks.Task, outer int) {
+// 	inner := 0
+// 	for _, subTask := range sub {
+// 		//To-Do: Console.ResetColor();
+// 		inner++
 
-		if !subTask.Done {
-			//To-Do: Console.ForegroundColor = ConsoleColor.Red;
-		} else if subTask.Done {
-			//To-Do: Console.ForegroundColor = ConsoleColor.Yellow;
-		}
-		subTask.ShowSubTask(subTask, outer, inner)
-	}
-	//TO-DO: Console.ResetColor();
-}
+// 		if !subTask.Done {
+// 			//To-Do: Console.ForegroundColor = ConsoleColor.Red;
+// 		} else if subTask.Done {
+// 			//To-Do: Console.ForegroundColor = ConsoleColor.Yellow;
+// 		}
+// 		subTask.ShowSubTask(subTask, outer, inner)
+// 	}
+// 	//TO-DO: Console.ResetColor();
+// }
 
 func (tdl TaskList) FindTaskToMark() {
 	fmt.Println("\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.")
@@ -144,10 +141,10 @@ func (tdl TaskList) ShowArchive() {
 		task := tdl.Archive[i]
 		amount++
 
-		task.ShowTask(task, i+1)
+		task.ShowTask(i + 1)
 
 		if task.TaskType == "C" {
-			showSubTask(task.SubTask, i+1)
+			task.ShowSubTask(task.SubTask, i+1)
 		}
 	}
 	//TO-DO: Console.ResetColor();

@@ -9,10 +9,10 @@ import (
 
 func ShowMainMenu(list lists.TaskList) {
 	fmt.Println("MAIN menyn", list)
-	//TO-DO: clear console
+	//TODO: clear console
 	showIntro()
 	fmt.Println("\nHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta")
-	//TO-DO: read input from console
+	//TODO: read input from console
 	input := 0
 	switch input {
 	case 1:
@@ -42,7 +42,7 @@ func showToDoMenu(list lists.TaskList) {
 			"[3] Arkivera utförda uppgifter\n" +
 			"[0] HUVUDMENY",
 	)
-	//TO-DO: read input from console
+	//TODO: read input from console
 	input := 0
 	switch input {
 	case 1:
@@ -55,7 +55,7 @@ func showToDoMenu(list lists.TaskList) {
 		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case 0:
-		//TO-DO: Console.Clear();
+		//TODO: clear console
 		ShowMainMenu(list)
 	}
 }
@@ -67,34 +67,26 @@ func showTaskMenu(list lists.TaskList) {
 	fmt.Println(
 		"\nUPPGIFTSMENY. Välj typ av uppgift:\n" +
 			"[1] Enkel uppgift\n" +
-			"[2] Deadline\n" +
-			"[3] Checklista\n" +
+			"[2] Checklista\n" +
 			"[0] HUVUDMENY",
 	)
-	//TO-DO: read input from console
+	//TODO: read input from console
 	input := 0
 	switch input {
 	case 1:
-		st, _ := tasks.NewSimpleTask().CreateSinmpleTask()
-		simpleWrapper := tasks.NewSinmpleTaskWrapper(&st)
-		// st.CreateSinmpleTask()
-		list.AddToDoTask(*simpleWrapper)
+		simple := tasks.NewSimpleTask("")
+		simple.Create()
+		list.AddToDoTask(*simple)
 		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case 2:
-		deadline := tasks.Task{}
-		deadline.Create("D")
-		list.AddToDoTask(deadline)
-		list.ShowLeftToDo()
-		showToDoMenu(list)
-	case 3:
-		checklist := tasks.Task{}
-		checklist.Create("C")
-		list.AddToDoTask(checklist)
+		checklist := tasks.NewChecklistTask("")
+		checklist.Create()
+		list.AddToDoTask(*checklist)
 		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case 0:
-		//TO-DO: Console.Clear();
+		//TODO: clear console
 		ShowMainMenu(list)
 	default:
 		ShowErrorMsg()
@@ -103,10 +95,10 @@ func showTaskMenu(list lists.TaskList) {
 
 func showArchiveMenu(list lists.TaskList) {
 	fmt.Println("\n[0] HUVUDMENY")
-	//TO-DO: read input from console
+	//TODO: read input from console
 	input := 0
 	if input == 0 {
-		//TO-DO: Console.Clear();
+		//TODO: clear console
 		ShowMainMenu(list)
 	}
 }

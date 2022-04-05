@@ -48,15 +48,29 @@ namespace LeftToDo
         }
 
         //  Displaying checklist "Header" task
-        public static void ShowTask(Task task, int index)
+        public static void ShowTask(Task task, int outer)
         {
-            if (task.done == false)
+            if (!task.done)
             {
-                Console.WriteLine($" - \t{index}\t{task.description}");
+                Console.WriteLine($" - \t{outer}\t{task.description}");
             }
             else
             {
-                Console.WriteLine($"[{task.done}]\t{index}\t{task.description}");
+                Console.WriteLine($"[{task.done}]\t{outer}\t{task.description}");
+            }
+
+            for (int i = 0; i < task.subTask.Count; i++)
+            {
+                var inner = i + 1;
+
+                if (!task.done)
+                {
+                    Console.WriteLine($"\t[ ]\t{outer} - {inner}\t{task.description}");
+                }
+                else
+                {
+                    Console.WriteLine($"\t[X]\t{outer} - {inner}\t{task.description}");
+                }
             }
         }
     }
