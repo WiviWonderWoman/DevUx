@@ -47,7 +47,7 @@ namespace LeftToDo
         {
             if (ToDo.Count < 1)
             {
-                Console.WriteLine($"\n\nATT GÖRA LISTAN ÄR TOM!\n\n");
+                Console.WriteLine($"\t\tATT GÖRA LISTAN ÄR TOM!");
                 return;
             }
             Console.WriteLine($"Status\tNr.\tUppgift\n");
@@ -113,7 +113,7 @@ namespace LeftToDo
             int number;
             while (int.TryParse(Console.ReadLine(), out number) == false)
             {
-                Console.WriteLine("Du skrev inte in ett tal. Försök igen.");
+                Console.WriteLine("\t\tDu skrev inte in en siffra. Försök igen.\n\n");
             }
             return number;
         }
@@ -122,7 +122,7 @@ namespace LeftToDo
         {
             if (Arc.Count < 1)
             {
-                Console.WriteLine($"\n\nARKIVET ÄR TOMT.\n\n");
+                Console.WriteLine($"\t\tARKIVET ÄR TOMT.\n\n");
                 return;
             }
             Console.WriteLine($"UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift\n");
@@ -140,7 +140,7 @@ namespace LeftToDo
                     SimpleTask.ShowTask(task, i + 1);
                 }
             }
-            Console.WriteLine($"\nWOW! DU HAR UTFÖRT {amount} UPPGIFTER!");
+            Console.WriteLine($"\t\tWOW! DU HAR UTFÖRT {amount} UPPGIFTER!\n\n");
         }
     }
 }

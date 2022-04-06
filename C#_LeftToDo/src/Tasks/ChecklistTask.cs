@@ -45,15 +45,15 @@ namespace LeftToDo
             if (!task.done)
             {
                 Console.WriteLine($" - \t{outer}\t{task.description}");
+                for (int i = 0; i < task.subTask.Count; i++)
+                {
+                    var sub = task.subTask[i];
+                    var inner = i + 1;
+                    SimpleTask.ShowTask(sub, outer, inner);
+                }
                 return;
             }
-            Console.WriteLine($"[{task.done}]\t{outer}\t{task.description}");
-            for (int i = 0; i < task.subTask.Count; i++)
-            {
-                var sub = task.subTask[i];
-                var inner = i + 1;
-                SimpleTask.ShowTask(sub, outer, inner);
-            }
+            Console.WriteLine($"[X]\t{outer}\t{task.description}");
         }
     }
 }

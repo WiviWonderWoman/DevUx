@@ -7,8 +7,8 @@ namespace LeftToDo
         // Mainmenu, handle user input with switch statement
         internal static void ShowMainMenu(TaskList list)
         {
+            Console.WriteLine("\tHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta");
             ShowIntro();
-            Console.WriteLine("HUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta");
             var menu = Console.ReadLine();
             switch (menu)
             {
@@ -32,19 +32,19 @@ namespace LeftToDo
         // Instructions to user
         private static void ShowIntro()
         {
-            Console.WriteLine("Välj i menyn nedan, ange siffran inom [] och tryck enter.\n");
+            Console.WriteLine("\nVälj siffra inom [] följt av enter.\n");
         }
         // List menu, handle user input with switch statement
         private static void ShowToDoMenu(TaskList list)
         {
-            ShowIntro();
             Console.WriteLine(
-                "\nUNDERMENY: Vad vill du göra?\n" +
+                "\n\tUNDERMENY: Vad vill du göra?\n" +
                 "[1] Lägg till uppgift\n" +
                 "[2] Markera / avmarkera uppgift\n" +
                 "[3] Arkivera utförda uppgifter\n" +
-                "[0] HUVUDMENY\n"
+                "[0] Tillbaka till HUVUDMENY"
             );
+            ShowIntro();
             var menu = Console.ReadLine();
             switch (menu)
             {
@@ -72,13 +72,13 @@ namespace LeftToDo
         private static void ShowTaskMenu(TaskList list)
         {
             list.ShowLeftToDo(list.ToDoList);
-            ShowIntro();
             Console.WriteLine(
-                "\n\nUPPGIFTSMENY. Välj typ av uppgift:\n" +
+                "\n\tUPPGIFTSMENY: Välj typ av uppgift:\n" +
                 "[1] Enkel uppgift\n" +
                 "[2] Checklista\n" +
-                "[0] HUVUDMENY\n\n"
+                "[0] Tillbaka till HUVUDMENY"
             );
+            ShowIntro();
             var menu = Console.ReadLine();
             switch (menu)
             {
@@ -107,7 +107,7 @@ namespace LeftToDo
         // Archive menu, lets user return to Mainmenu
         private static void ShowArchiveMenu(TaskList list)
         {
-            Console.WriteLine("\n[0] HUVUDMENY\n\n");
+            Console.WriteLine("\n[0] Tillbaka till HUVUDMENY\n");
             var input = Console.ReadLine();
             if (input == "0")
             {
@@ -117,13 +117,13 @@ namespace LeftToDo
         // Farewell message
         private static void ShowFarewell()
         {
-            Console.WriteLine("Tack för besöket och välkommen åter!");
+            Console.WriteLine("\t\tTack för besöket och välkommen åter!\n\n");
             return;
         }
         // Error message
         private static void ShowErrorMsg()
         {
-            Console.WriteLine("\nOgiltligt val. Vargod försök igen!");
+            Console.WriteLine("\t\tOgiltligt val. Vargod försök igen!\n\n");
         }
     }
 }

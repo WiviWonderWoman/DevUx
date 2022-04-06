@@ -24,10 +24,10 @@ namespace LeftToDo
         {
             if (!task.done)
             {
-                Console.WriteLine($"\t[ ]\t{outer} - {inner}\t{task.description}");
+                Console.WriteLine($"[ ]\t{outer} - {inner}\t{task.description}");
                 return;
             }
-            Console.WriteLine($"\t[X]\t{outer} - {inner}\t{task.description}");
+            Console.WriteLine($"[X]\t{outer} - {inner}\t{task.description}");
         }
         // Takes info from user
         internal override void Create()
