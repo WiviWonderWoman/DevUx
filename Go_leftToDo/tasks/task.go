@@ -18,11 +18,12 @@ type TaskRepository interface {
 }
 
 func (t Task) ShowTask(index int) {
-	if !t.Done {
-		fmt.Println("[ ]\t", index, "\t", t.Description)
-
+	if !t.Done && t.TaskType == "C" {
+		fmt.Println(" - \t\t", index, "\t\t", t.Description)
+	} else if !t.Done && t.TaskType == "S" {
+		fmt.Println("[ ]\t\t", index, "\t\t", t.Description)
 	} else if t.Done {
-		fmt.Println("[X]\t", index, "\t", t.Description)
+		fmt.Println("[X]\t\t", index, "\t\t", t.Description)
 	}
 }
 

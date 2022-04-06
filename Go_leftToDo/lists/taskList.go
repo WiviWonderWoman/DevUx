@@ -45,10 +45,10 @@ func ArchiveTask(list TaskList) TaskList {
 
 func ShowLeftToDo(list []tasks.Task) {
 	if len(list) < 1 {
-		fmt.Println("\n\nATT GÖRA LISTAN ÄR TOM!")
+		fmt.Println("\t\tATT GÖRA LISTAN ÄR TOM!")
 		return
 	}
-	fmt.Println("Status\tNr.\tUppgift")
+	fmt.Println("Status\t\tNr.\t\tUppgift")
 	index := 0
 	for _, task := range list {
 		index++
@@ -63,16 +63,15 @@ func ShowLeftToDo(list []tasks.Task) {
 }
 
 func FindTaskToMark(list []tasks.Task) {
-	fmt.Println("\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.")
+	fmt.Printf("\n\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.\n\n")
 	input := readInt()
 	for i := 0; i < len(list); i++ {
 		task := list[i]
 		if input == i {
-			fmt.Println("INPUT: ", input, "INDEX: ", i)
 			if task.TaskType == "S" {
 				list[i] = task.MarkAsDone(task)
 			} else if task.TaskType == "C" {
-				fmt.Println("\nVilken underuppgift vill du markera / avmarkera?")
+				fmt.Printf("\n\nVilken underuppgift vill du markera / avmarkera?\n\n")
 				subInput := readInt()
 				count := len(task.SubTask)
 				marked := 0
@@ -82,7 +81,6 @@ func FindTaskToMark(list []tasks.Task) {
 						marked++
 					}
 					if subInput == j {
-						fmt.Println("SUBINPUT: ", input, "SUBINDEX: ", i)
 						*task.SubTask[j] = subTask.CreateMarkAsDone(*subTask)
 						subTask.Done = !subTask.Done
 						marked++
@@ -103,7 +101,7 @@ func readInt() int {
 	var number int
 	number, err := strconv.Atoi(input)
 	if err != nil {
-		fmt.Println("Du skrev inte in ett tal. Försök igen.")
+		fmt.Printf("\n\t\tDu skrev inte in en siffra. Försök igen.\n\n")
 		fmt.Scanln(&input)
 	}
 	return number - 1
@@ -111,7 +109,7 @@ func readInt() int {
 
 func ShowArchive(list []tasks.Task) {
 	if len(list) < 1 {
-		fmt.Println("\n\nARKIVET ÄR TOMT.")
+		fmt.Printf("\n\t\tARKIVET ÄR TOMT.\n\n")
 		return
 	}
 	fmt.Println("UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift")
@@ -127,5 +125,5 @@ func ShowArchive(list []tasks.Task) {
 			}
 		}
 	}
-	fmt.Printf("\nWOW! DU HAR UTFÖRT %v UPPGIFTER!", amount)
+	fmt.Printf("\n\t\tWOW! DU HAR UTFÖRT %v UPPGIFTER!\n", amount)
 }

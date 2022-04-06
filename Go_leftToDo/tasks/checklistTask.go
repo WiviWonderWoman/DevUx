@@ -24,7 +24,7 @@ func (c ChecklistTask) Create() *ChecklistTask {
 	fmt.Scanln(&input)
 	checklist := newChecklistTask(strings.ToUpper(input))
 	stopInput := false
-	fmt.Println("Ange uppgifter, separerat med enter.\n\n[0] för att slutföra checklistan.")
+	fmt.Println("Ange uppgifter, separerat med enter. [0] för att slutföra checklistan.")
 	for !stopInput {
 		var subInput string
 		fmt.Scanln(&subInput)
@@ -35,14 +35,5 @@ func (c ChecklistTask) Create() *ChecklistTask {
 			stopInput = true
 		}
 	}
-	fmt.Println("CHECKLIST: ", checklist)
 	return checklist
-}
-
-func (c ChecklistTask) ShowTask(index int) {
-	if !c.Done {
-		fmt.Println("[ ]\t", index, "\t", c.Description)
-	} else if c.Done {
-		fmt.Println("[X]\t", index, "\t", c.Description)
-	}
 }

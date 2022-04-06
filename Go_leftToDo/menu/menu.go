@@ -8,8 +8,8 @@ import (
 )
 
 func ShowMainMenu(list lists.TaskList) {
+	fmt.Printf("\n\tHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta\n")
 	showIntro()
-	fmt.Printf("\nHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta\n")
 	var input string
 	fmt.Scanln(&input)
 	switch input {
@@ -22,24 +22,24 @@ func ShowMainMenu(list lists.TaskList) {
 	case "0":
 		showFarewell()
 	default:
-		ShowErrorMsg()
+		showErrorMsg()
 		ShowMainMenu(list)
 	}
 }
 
 func showIntro() {
-	fmt.Println("\nVälj i menyn nedan, ange siffran inom [] och tryck enter.")
+	fmt.Printf("\nVälj siffra inom [] följt av enter.\n")
 }
 
 func showToDoMenu(list lists.TaskList) {
-	showIntro()
 	fmt.Printf(
-		"\nUNDERMENY: Vad vill du göra?\n" +
+		"\n\tUNDERMENY: Vad vill du göra?\n" +
 			"[1] Lägg till uppgift\n" +
 			"[2] Markera / avmarkera uppgift\n" +
 			"[3] Arkivera utförda uppgifter\n" +
-			"[0] HUVUDMENY\n",
+			"[0] Tillbaka till HUVUDMENY\n",
 	)
+	showIntro()
 	var input string
 	fmt.Scanln(&input)
 	switch input {
@@ -55,19 +55,20 @@ func showToDoMenu(list lists.TaskList) {
 	case "0":
 		ShowMainMenu(list)
 	default:
-		ShowErrorMsg()
+		showErrorMsg()
+		showToDoMenu(list)
 	}
 }
 
 func showTaskMenu(list lists.TaskList) {
 	lists.ShowLeftToDo(list.ToDoList)
-	showIntro()
-	fmt.Println(
-		"\nUPPGIFTSMENY. Välj typ av uppgift:\n" +
+	fmt.Printf(
+		"\n\tUPPGIFTSMENY. Välj typ av uppgift:\n" +
 			"[1] Enkel uppgift\n" +
 			"[2] Checklista\n" +
-			"[0] HUVUDMENY",
+			"[0] Tillbaka till HUVUDMENY\n",
 	)
+	showIntro()
 	var input string
 	fmt.Scanln(&input)
 	switch input {
@@ -84,23 +85,27 @@ func showTaskMenu(list lists.TaskList) {
 	case "0":
 		ShowMainMenu(list)
 	default:
-		ShowErrorMsg()
+		showErrorMsg()
+		showTaskMenu(list)
 	}
 }
 
 func showArchiveMenu(list lists.TaskList) {
-	fmt.Printf("\n[0] HUVUDMENY\n")
+	fmt.Printf("\n[0] Tillbaka till HUVUDMENY\n")
 	var input string
 	fmt.Scanln(&input)
 	if input == "0" {
 		ShowMainMenu(list)
+	} else {
+		showErrorMsg()
+		showArchiveMenu(list)
 	}
 }
 
 func showFarewell() {
-	fmt.Printf("\nTack för besöket och välkommen åter!\n")
+	fmt.Printf("\n\t\tTack för besöket och välkommen åter!\n\n")
 }
 
-func ShowErrorMsg() {
-	fmt.Printf("\nOgiltligt val. Vargod försök igen!\n")
+func showErrorMsg() {
+	fmt.Printf("\n\t\tOgiltligt val. Vargod försök igen!\n\n")
 }
