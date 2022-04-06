@@ -1,9 +1,12 @@
 package tasks
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type SimpleTask struct {
 	Task
+	MarkAsDoneFn func(simple SimpleTask) SimpleTask
 }
 
 func NewSimpleTask(description string) *SimpleTask {
@@ -16,33 +19,35 @@ func NewSimpleTask(description string) *SimpleTask {
 
 func (s SimpleTask) Create() *SimpleTask {
 	fmt.Printf("\nAnge uppgift:\n")
-
 	var input string
 	fmt.Scanln(&input)
-
 	simple := NewSimpleTask(input)
 	return simple
 }
 
-func (s SimpleTask) ShowTask(index int) {
+func (s *SimpleTask) ShowTask(index int) {
 	if !s.Done {
 		fmt.Println("[ ]\t", index, "\t", s.Description)
 	} else if s.Done {
 		fmt.Println("[X]\t", index, "\t", s.Description)
 	}
-
 }
 
-func (s SimpleTask) ShowSubTask(outer int, inner int) {
-
+func (s *SimpleTask) ShowSubTask(outer int, inner int) {
 	if !s.Done {
 		fmt.Println("\t[ ]\t", outer, " - ", inner, "\t", s.Description)
 	} else if s.Done {
 		fmt.Println("\t[X]\t", outer, " - ", inner, "\t", s.Description)
 	}
-
 }
 
-func MarkAsDone(s SimpleTask) {
-	s.Done = !s.Done
+func (s *SimpleTask) MarkAsDone(simple SimpleTask) SimpleTask {
+	return simple.MarkAsDoneFn(simple)
+}
+
+func (s SimpleTask) CreateMarkAsDone(simple SimpleTask) SimpleTask {
+	simple.MarkAsDoneFn = func(simple SimpleTask) SimpleTask {
+		return simple
+	}
+	return simple
 }

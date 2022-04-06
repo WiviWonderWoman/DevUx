@@ -31,7 +31,6 @@ func addTaskToArhive(list []tasks.Task, task tasks.Task) {
 func ArchiveTask(list TaskList) {
 	for i := 0; i < len(list.ToDoList); i++ {
 		task := list.ToDoList[i]
-
 		if task.Done {
 			addTaskToArhive(list.Archive, task)
 			list.ToDoList = append(list.ToDoList[:i], list.ToDoList[i+1:]...)
@@ -45,7 +44,6 @@ func ShowLeftToDo(list []tasks.Task) {
 		fmt.Println("\n\nATT GÖRA LISTAN ÄR TOM!")
 		return
 	}
-
 	fmt.Println("Status\tNr.\tUppgift")
 	index := 0
 	for _, task := range list {
@@ -59,7 +57,6 @@ func ShowLeftToDo(list []tasks.Task) {
 		}
 
 		task.ShowTask(index)
-
 		if task.TaskType == "C" {
 			for i := 0; i < len(task.SubTask); i++ {
 				sub := task.SubTask[i]
@@ -72,41 +69,32 @@ func ShowLeftToDo(list []tasks.Task) {
 
 func FindTaskToMark(list []tasks.Task) {
 	fmt.Println("\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.")
-	input := readInt() //TODO: read input from console and parse to int readInt()
-
+	input := readInt()
 	for i := 0; i < len(list); i++ {
 		task := list[i]
-
 		if input == i {
 			fmt.Println("INPUT: ", input, "INDEX: ", i)
 			if task.TaskType == "S" {
-				task.MarkAsDone()
-				// task.Done = !task.Done
+				list[i] = task.MarkAsDone(task)
 			} else if task.TaskType == "C" {
 				fmt.Println("\nVilken underuppgift vill du markera / avmarkera?")
-				subInput := readInt() //TODO: read input from console and parse to int readInt()
-
+				subInput := readInt()
 				count := len(task.SubTask)
 				marked := 0
-
 				for j := 0; j < count; j++ {
-					subTask := *task.SubTask[j]
-
+					subTask := task.SubTask[j]
 					if subTask.Done {
 						marked++
 					}
-
 					if subInput == j {
 						fmt.Println("SUBINPUT: ", input, "SUBINDEX: ", i)
-						subTask.MarkAsDone()
+						*task.SubTask[j] = subTask.CreateMarkAsDone(*subTask)
 						subTask.Done = !subTask.Done
 						marked++
 					}
 				}
-
 				if count == marked {
-					task.MarkAsDone()
-					// task.Done = !task.Done
+					list[i] = task.MarkAsDone(task)
 				}
 			}
 		}
@@ -117,10 +105,8 @@ func FindTaskToMark(list []tasks.Task) {
 func readInt() int {
 	var input string
 	fmt.Scanln(&input)
-
 	var number int
 	number, err := strconv.Atoi(input)
-
 	if err != nil {
 		fmt.Println("Du skrev inte in ett tal. Försök igen.")
 		fmt.Scanln(&input)
@@ -140,9 +126,7 @@ func ShowArchive(list []tasks.Task) {
 	for i := 0; i < len(list); i++ {
 		task := list[i]
 		amount++
-
 		task.ShowTask(i + 1)
-
 		if task.TaskType == "C" {
 			for j := 0; j < len(task.SubTask); j++ {
 				sub := task.SubTask[j]
