@@ -44,7 +44,6 @@ func ArchiveTask(list TaskList) TaskList {
 }
 
 func ShowLeftToDo(list []tasks.Task) {
-	//TODO: clear console
 	if len(list) < 1 {
 		fmt.Println("\n\nATT GÖRA LISTAN ÄR TOM!")
 		return
@@ -52,13 +51,7 @@ func ShowLeftToDo(list []tasks.Task) {
 	fmt.Println("Status\tNr.\tUppgift")
 	index := 0
 	for _, task := range list {
-		//TODO: reset console color
 		index++
-		if !task.Done {
-			//TODO: set console color to red
-		} else if task.Done {
-			//TODO: set console color to yellow
-		}
 		task.ShowTask(index)
 		if task.TaskType == "C" {
 			for i := 0; i < len(task.SubTask); i++ {
@@ -67,7 +60,6 @@ func ShowLeftToDo(list []tasks.Task) {
 			}
 		}
 	}
-	//TODO: reset console color
 }
 
 func FindTaskToMark(list []tasks.Task) {
@@ -118,13 +110,11 @@ func readInt() int {
 }
 
 func ShowArchive(list []tasks.Task) {
-	//TODO: clear console
 	if len(list) < 1 {
 		fmt.Println("\n\nARKIVET ÄR TOMT.")
 		return
 	}
 	fmt.Println("UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift")
-	//TODO: set console color to green
 	amount := 0
 	for i := 0; i < len(list); i++ {
 		task := list[i]
@@ -137,6 +127,5 @@ func ShowArchive(list []tasks.Task) {
 			}
 		}
 	}
-	//TODO: reset console color
 	fmt.Printf("\nWOW! DU HAR UTFÖRT %v UPPGIFTER!", amount)
 }

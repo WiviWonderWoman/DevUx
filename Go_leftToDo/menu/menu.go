@@ -8,7 +8,6 @@ import (
 )
 
 func ShowMainMenu(list lists.TaskList) {
-	//TODO: clear console
 	showIntro()
 	fmt.Printf("\nHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta\n")
 	var input string
@@ -54,7 +53,6 @@ func showToDoMenu(list lists.TaskList) {
 		lists.ShowLeftToDo(list.ToDoList)
 		showToDoMenu(list)
 	case "0":
-		//TODO: clear console
 		ShowMainMenu(list)
 	default:
 		ShowErrorMsg()
@@ -84,7 +82,6 @@ func showTaskMenu(list lists.TaskList) {
 		lists.ShowLeftToDo(list.ToDoList)
 		showToDoMenu(list)
 	case "0":
-		//TODO: clear console
 		ShowMainMenu(list)
 	default:
 		ShowErrorMsg()
@@ -96,7 +93,6 @@ func showArchiveMenu(list lists.TaskList) {
 	var input string
 	fmt.Scanln(&input)
 	if input == "0" {
-		//TODO: clear console
 		ShowMainMenu(list)
 	}
 }
