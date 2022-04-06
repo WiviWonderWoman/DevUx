@@ -2,9 +2,7 @@ using System.Collections.Generic;
 
 namespace LeftToDo
 {
-    //TODO: Combine Task & SimpleTask
-    // Abstract super class, handles all types of Task
-    public abstract class Task
+    public abstract class Task // Abstract super class, handles all types of Task
     {
         public string type
         {
@@ -21,15 +19,12 @@ namespace LeftToDo
             get;
             set;
         }
-
         public List<SimpleTask> subTask;
-
         // Marks task as Done
         public void MarkAsDone()
         {
             done = !done;
         }
-
         // Takes info from user, overrides in each subclass
         internal abstract void Create();
     }
