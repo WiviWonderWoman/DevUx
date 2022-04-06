@@ -25,14 +25,6 @@ func (s SimpleTask) Create() *SimpleTask {
 	return simple
 }
 
-// func (s *SimpleTask) ShowTask(index int) {
-// 	if !s.Done {
-// 		fmt.Println("[ ]\t", index, "\t", s.Description)
-// 	} else if s.Done {
-// 		fmt.Println("[X]\t", index, "\t", s.Description)
-// 	}
-// }
-
 func (s *SimpleTask) ShowSubTask(outer int, inner int) {
 	if !s.Done {
 		fmt.Println("\t[ ]\t", outer, " - ", inner, "\t", s.Description)

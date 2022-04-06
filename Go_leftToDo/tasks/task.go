@@ -3,11 +3,10 @@ package tasks
 import "fmt"
 
 type Task struct {
-	TaskType    string
-	Description string
-	Done        bool
-	DaysLeft    int
-	SubTask     []*SimpleTask
+	TaskType    string        // describes task type user choose
+	Description string        // what action / ToDo task user inputs
+	Done        bool          // indicates if task is done
+	SubTask     []*SimpleTask // if task is of type checklist, a slice with subtasks
 }
 
 type TaskRepository interface {

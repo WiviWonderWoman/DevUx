@@ -108,6 +108,7 @@ namespace LeftToDo
             }
             list.ShowLeftToDo(list.ToDoList);
         }
+
         private static int ReadInt()
         {
             int number;
@@ -117,6 +118,7 @@ namespace LeftToDo
             }
             return number;
         }
+        
         // Display archived Task
         internal void ShowArchive(List<Task> Arc)
         {
