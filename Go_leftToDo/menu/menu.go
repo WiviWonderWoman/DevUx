@@ -11,10 +11,8 @@ func ShowMainMenu(list lists.TaskList) {
 	//TODO: clear console
 	showIntro()
 	fmt.Printf("\nHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta\n")
-
 	var input string
 	fmt.Scanln(&input)
-
 	switch input {
 	case "1":
 		lists.ShowLeftToDo(list.ToDoList)
@@ -45,7 +43,6 @@ func showToDoMenu(list lists.TaskList) {
 	)
 	var input string
 	fmt.Scanln(&input)
-
 	switch input {
 	case "1":
 		showTaskMenu(list)
@@ -53,7 +50,7 @@ func showToDoMenu(list lists.TaskList) {
 		lists.FindTaskToMark(list.ToDoList)
 		showToDoMenu(list)
 	case "3":
-		lists.ArchiveTask(list)
+		list = lists.ArchiveTask(list)
 		lists.ShowLeftToDo(list.ToDoList)
 		showToDoMenu(list)
 	case "0":
@@ -75,18 +72,15 @@ func showTaskMenu(list lists.TaskList) {
 	)
 	var input string
 	fmt.Scanln(&input)
-
 	switch input {
 	case "1":
 		simple := tasks.SimpleTask{}.Create()
 		list.ToDoList = lists.AddToDoTask(list.ToDoList, simple.Task)
-		// fmt.Println("LISTAN: ", list.ToDoList)
 		lists.ShowLeftToDo(list.ToDoList)
 		showToDoMenu(list)
 	case "2":
 		checklist := tasks.ChecklistTask{}.Create()
 		list.ToDoList = lists.AddToDoTask(list.ToDoList, checklist.Task)
-		// fmt.Println("LISTAN: ", list.ToDoList)
 		lists.ShowLeftToDo(list.ToDoList)
 		showToDoMenu(list)
 	case "0":
@@ -101,7 +95,6 @@ func showArchiveMenu(list lists.TaskList) {
 	fmt.Printf("\n[0] HUVUDMENY\n")
 	var input string
 	fmt.Scanln(&input)
-	fmt.Printf("Du tryckte: %s i ARKIVET", input)
 	if input == "0" {
 		//TODO: clear console
 		ShowMainMenu(list)

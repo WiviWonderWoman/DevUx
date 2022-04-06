@@ -19,23 +19,28 @@ func NewTaskList() TaskList {
 	}
 }
 
-func AddToDoTask(list []tasks.Task, task tasks.Task) []tasks.Task {
-	list = append(list, task)
-	return list
+func AddToDoTask(todoList []tasks.Task, task tasks.Task) []tasks.Task {
+	todoList = append(todoList, task)
+	return todoList
 }
 
-func addTaskToArhive(list []tasks.Task, task tasks.Task) {
-	list = append(list, task)
+func addTaskToArhive(archive []tasks.Task, task tasks.Task) []tasks.Task {
+	archive = append(archive, task)
+	return archive
 }
 
-func ArchiveTask(list TaskList) {
+func ArchiveTask(list TaskList) TaskList {
+	tdl := []tasks.Task{}
 	for i := 0; i < len(list.ToDoList); i++ {
 		task := list.ToDoList[i]
-		if task.Done {
-			addTaskToArhive(list.Archive, task)
-			list.ToDoList = append(list.ToDoList[:i], list.ToDoList[i+1:]...)
+		if task.Done == true {
+			list.Archive = addTaskToArhive(list.Archive, list.ToDoList[i])
+		} else if task.Done == false {
+			tdl = append(tdl, list.ToDoList[i])
 		}
 	}
+	list.ToDoList = append(tdl)
+	return list
 }
 
 func ShowLeftToDo(list []tasks.Task) {
@@ -49,13 +54,11 @@ func ShowLeftToDo(list []tasks.Task) {
 	for _, task := range list {
 		//TODO: reset console color
 		index++
-
 		if !task.Done {
 			//TODO: set console color to red
 		} else if task.Done {
 			//TODO: set console color to yellow
 		}
-
 		task.ShowTask(index)
 		if task.TaskType == "C" {
 			for i := 0; i < len(task.SubTask); i++ {

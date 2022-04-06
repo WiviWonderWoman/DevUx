@@ -8,7 +8,6 @@ type Task struct {
 	Done        bool
 	DaysLeft    int
 	SubTask     []*SimpleTask
-	// MarkAsDone  func(t Task) Task
 }
 
 type TaskRepository interface {
@@ -25,7 +24,6 @@ func (t Task) ShowTask(index int) {
 	} else if t.Done {
 		fmt.Println("[X]\t", index, "\t", t.Description)
 	}
-
 }
 
 func (t Task) MarkAsDone(task Task) Task {
