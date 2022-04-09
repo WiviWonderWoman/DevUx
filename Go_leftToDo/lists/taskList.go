@@ -52,10 +52,11 @@ func (tl *TaskList) ShowLeftToDo() {
 		return
 	}
 	fmt.Println("Status\tNr.\tUppgift")
-	index := 0
+
+	index := 1
 	for _, task := range tl.ToDoList {
-		index++
 		task.ShowTask(index)
+		index++
 	}
 }
 
@@ -101,13 +102,15 @@ func (tl *TaskList) FindTaskToMark() {
 
 // Parse input to an integer or displays error message
 func readInt() int {
+
 	var input string
 	fmt.Scanln(&input)
-
 	number, err := strconv.Atoi(input)
-	if err != nil {
+
+	for err != nil {
 		fmt.Printf("\n\t\tDu skrev inte in en siffra. Försök igen.\n\n")
 		fmt.Scanln(&input)
+		number, err = strconv.Atoi(input)
 	}
 	return number - 1
 }

@@ -4,6 +4,34 @@ namespace Example
 {
     private class Example
     {
+        private static void Loops()
+        {
+            int length = 2;
+            bool keepLooping = true;
+            int[] arr = { 1, 2, 3 };
+
+            for (int i = 0; i < length; i++)
+            {
+                // Take appropriate action
+            }
+
+            while (keepLooping)
+            {
+                keepLooping = false;
+            }
+
+            do
+            {
+                !keepLooping = true;
+            } while (true);
+
+            foreach (var nr in arr)
+            {
+                Console.WriteLine(nr);
+            }
+        }
+
+
         public void ReceiveStringNoReturn(string parameter)
         {
             try

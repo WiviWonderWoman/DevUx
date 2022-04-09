@@ -28,8 +28,10 @@ type TaskRepository interface {
 
 // Displays any Task
 func (t Task) ShowTask(index int) {
+
 	if !t.Done && t.TaskType == "C" {
 		fmt.Println(" - \t", index, "\t", t.Description)
+
 		for i := 0; i < len(t.SubTask); i++ {
 			sub := t.SubTask[i]
 			sub.ShowSubTask(index, i+1)

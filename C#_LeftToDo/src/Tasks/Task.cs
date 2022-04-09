@@ -38,6 +38,7 @@ namespace LeftToDo
             if ((!task.done) && (task.type == "C"))
             {
                 Console.WriteLine($" - \t{index}\t{task.description}");
+
                 for (int i = 0; i < task.subTask.Count; i++)
                 {
                     var sub = task.subTask[i];

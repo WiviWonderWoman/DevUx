@@ -2,6 +2,29 @@ package example
 
 import "fmt"
 
+func Loops() {
+	count := 2
+	for i := 0; i < count; i++ {
+		// Take appropriate action
+	}
+
+	keepLooping := true
+	for keepLooping {
+		keepLooping = false
+		// Take appropriate action
+	}
+
+	for !keepLooping {
+		// Take appropriate action
+		keepLooping = true
+	}
+
+	arr := []int{1, 2, 3}
+	for _, nr := range arr {
+		fmt.Println(nr)
+	}
+}
+
 type example struct {
 }
 

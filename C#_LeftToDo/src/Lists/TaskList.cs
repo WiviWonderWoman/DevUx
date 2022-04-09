@@ -52,27 +52,20 @@ namespace LeftToDo
         }
 
         // Display ToDoList  
-        internal void ShowLeftToDo(List<Task> ToDo)
+        internal void ShowLeftToDo(List<Task> ToDoList)
         {
-            if (ToDo.Count < 1)
+            if (ToDoList.Count < 1)
             {
                 Console.WriteLine($"\t\tATT GÖRA LISTAN ÄR TOM!");
                 return;
             }
             Console.WriteLine($"Status\tNr.\tUppgift\n");
 
-            for (int i = 0; i < ToDo.Count; i++)
+            int index = 1;
+            foreach (var task in ToDoList)
             {
-                var item = ToDo[i];
-                var index = i + 1;
-                if (item.type == "S")
-                {
-                    SimpleTask.ShowTask(item, index);
-                }
-                else if (item.type == "C")
-                {
-                    Checklist.ShowTask(item, index);
-                }
+                Task.ShowTask(task, index);
+                index++;
             }
         }
 
