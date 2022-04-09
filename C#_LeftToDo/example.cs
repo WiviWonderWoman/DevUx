@@ -1,39 +1,36 @@
 using System;
-using System.Collections.Generic;
 
 namespace LeftToDo
 {
     private class Example
     {
-        //[ACCESS][MODIFIER][RETURN][IDENTIFIER]
+        public void ReceiveIntNoReturn(int number)
+        {
+            try
+            {
+                var integer = ReturnInt();
+                Console.WriteLine(number + integer);
+            }
+            catch (System.Exception)
+            {
+                throw new Error();
+            }
+        }
+
         private static int ReturnInt()
         {
             int returnNr = 1;
             var e = Example;
-            // check for errors
+
             try
-            {  //[INSTANCE METHOD CALL] [ARGUMENT]
+            {
                 e.ReceiveIntNoReturn(returnNr);
             }
-            catch (System.Exception) // handle errors
+            catch (System.Exception)
             {
                 throw new Error();
             }
             return returnNr;
-        }
-
-        //[ACCESS] [RETURN] [IDENTIFIER] [PARAMETER]
-        public void ReceiveIntNoReturn(int number)
-        {
-            try // check for errors
-            {   //[STATIC METHOD CALL]
-                var integer = ReturnInt();
-                Console.WriteLine(number + integer);
-            }
-            catch (System.Exception) // handle errors
-            {
-                throw new Error();
-            }
         }
 
 

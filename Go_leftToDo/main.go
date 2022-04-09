@@ -1,4 +1,4 @@
-// Package main is the startingpoint of the program
+// Package main is the starting point of the program
 package main
 
 import (
@@ -10,6 +10,6 @@ import (
 
 func main() {
 	fmt.Printf("Välkommen till Din digitala Att Göra Lista!\n")
-	todo := lists.NewTaskList()
-	menu.ShowMainMenu(todo)
+	list := lists.NewTaskList()
+	menu.ShowMainMenu(list)
 }

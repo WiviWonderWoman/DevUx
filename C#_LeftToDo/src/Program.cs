@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LeftToDo
 {
-    class Program // Class for the startingpoint of the program
+    class Program // Class Program is the starting point of the program
     {
         static void Main(string[] args)
         {
