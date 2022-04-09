@@ -3,46 +3,55 @@ using System.Collections.Generic;
 
 namespace LeftToDo
 {
-    public class TaskList /* ToDolist handles all lists and their methods */
+    /* ToDolist a class that handles all lists and their methods */
+    public class TaskList
     {
-        public List<Task> ToDoList
+        public List<Task> ToDoList // Tasks ToDo
         {
             get;
             private set;
         }
-        public List<Task> Archive
+        public List<Task> Archive // Archived done Tasks
         {
             get;
             private set;
         }
+
+        // Constructor
         public TaskList()
         {
             ToDoList = new List<Task>();
             Archive = new List<Task>();
         }
-        // Adds new Task to ToDo
+
+        // Adds new Task to ToDoList
         public void AddToDoTask(Task task)
         {
             ToDoList.Add(task);
         }
-        // Adds Task that should be archived to Arc
+
+        // Adds Task to Archive
         private void AddTaskToArhive(Task task)
         {
             Archive.Add(task);
         }
-        // Iterates thru ToDo to find done Task to archive
+
+        // Iterates thru ToDoList to find done Task to archive
         public void ArchiveTask()
         {
-            foreach (var task in ToDoList)
+            for (int i = 0; i < ToDoList.Count; i++)
             {
+                var task = ToDoList[i];
                 if (task.done)
                 {
                     AddTaskToArhive(task);
                     ToDoList.Remove(task);
+                    i--;
                 }
             }
         }
-        // Display List of Task 
+
+        // Display ToDoList  
         internal void ShowLeftToDo(List<Task> ToDo)
         {
             if (ToDo.Count < 1)
@@ -66,11 +75,13 @@ namespace LeftToDo
                 }
             }
         }
-        // Find task to mark as done / undone
+
+        // Find Task to mark as done / undone
         internal void FindTaskToMark(TaskList list)
         {
             Console.WriteLine("\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.\n");
             int index = ReadInt() - 1;
+
             for (int i = 0; i < list.ToDoList.Count; i++)
             {
                 var task = list.ToDoList[i];
@@ -80,12 +91,14 @@ namespace LeftToDo
                     {
                         Console.WriteLine("\nVilken underuppgift vill du markera / avmarkera?\n");
                         int subIndex = ReadInt() - 1;
+
                         var count = task.subTask.Count;
                         var marked = 0;
+
                         for (int j = 0; j < count; j++)
                         {
                             var subTask = task.subTask[j];
-                            if (subTask.done == true)
+                            if (subTask.done)
                             {
                                 marked++;
                             }
@@ -109,6 +122,7 @@ namespace LeftToDo
             list.ShowLeftToDo(list.ToDoList);
         }
 
+        // Parse input to an integer or displays error message
         private static int ReadInt()
         {
             int number;
@@ -118,24 +132,32 @@ namespace LeftToDo
             }
             return number;
         }
-        
-        // Display archived Task
-        internal void ShowArchive(List<Task> Arc)
+
+        // Display Archive
+        internal void ShowArchive(List<Task> Archive)
         {
-            if (Arc.Count < 1)
+            if (Archive.Count < 1)
             {
                 Console.WriteLine($"\t\tARKIVET ÄR TOMT.\n\n");
                 return;
             }
+
             Console.WriteLine($"UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift\n");
             int amount = 0;
-            for (int i = 0; i < Arc.Count; i++)
+
+            for (int i = 0; i < Archive.Count; i++)
             {
-                var task = Arc[i];
+                var task = Archive[i];
                 amount++;
                 if (task.type == "C")
                 {
                     Checklist.ShowTask(task, i + 1);
+                    for (int j = 0; j < task.subTask.Count; j++)
+                    {
+                        var sub = task.subTask[j];
+                        SimpleTask.ShowTask(sub, i + 1, j + 1);
+                        amount++;
+                    }
                 }
                 else if (task.type == "S")
                 {

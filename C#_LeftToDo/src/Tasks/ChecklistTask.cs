@@ -6,19 +6,22 @@ namespace LeftToDo
 {
     public class Checklist : Task // Derives from Task
     {
+        // Constructor
         public Checklist(string specification)
         {
             type = "C";
             description = specification;
             subTask = new List<SimpleTask>();
         }
-        // Takes info from user
+
+        // Adds input from user as description.
         internal override void Create()
         {
-            Console.WriteLine("\nAnge Rubrik-uppgift:\n");
+            Console.WriteLine("Ange Rubrik-uppgift:\n");
             description = Console.ReadLine().ToUpper();
+
             bool input = true;
-            Console.WriteLine("\nAnge uppgifter, separerat med enter.\n\n[0] för att slutföra checklistan.\n");
+            Console.WriteLine("Ange uppgifter, separerat med enter.[0] för att slutföra checklistan.");
             do
             {
                 var specification = Console.ReadLine();
@@ -30,30 +33,10 @@ namespace LeftToDo
                 {
                     var newTask = new SimpleTask(specification);
                     newTask.type = "sub";
-                    AddSubTask(newTask);
+
+                    subTask.Add(newTask);
                 }
             } while (input);
-        }
-        // Adding objects to subTask
-        public void AddSubTask(SimpleTask task)
-        {
-            subTask.Add(task);
-        }
-        //  Displaying checklist "Header" task
-        public static void ShowTask(Task task, int outer)
-        {
-            if (!task.done)
-            {
-                Console.WriteLine($" - \t{outer}\t{task.description}");
-                for (int i = 0; i < task.subTask.Count; i++)
-                {
-                    var sub = task.subTask[i];
-                    var inner = i + 1;
-                    SimpleTask.ShowTask(sub, outer, inner);
-                }
-                return;
-            }
-            Console.WriteLine($"[X]\t{outer}\t{task.description}");
         }
     }
 }

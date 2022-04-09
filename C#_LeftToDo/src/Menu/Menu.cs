@@ -2,9 +2,9 @@ using System;
 
 namespace LeftToDo
 {
-    abstract class Menu // Menu handles out- / input
+    abstract class Menu // Menu displays and handles out- / input
     {
-        // Mainmenu, handle user input with switch statement
+        // Static method - displays main menu & handles user input in switch statement
         internal static void ShowMainMenu(TaskList list)
         {
             Console.WriteLine("\tHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta");
@@ -29,12 +29,13 @@ namespace LeftToDo
                     break;
             }
         }
-        // Instructions to user
+        // Static method - displays instructions to user
         private static void ShowIntro()
         {
             Console.WriteLine("\nVälj siffra inom [] följt av enter.\n");
         }
-        // List menu, handle user input with switch statement
+
+        // Static method - handles user input in switch statement
         private static void ShowToDoMenu(TaskList list)
         {
             Console.WriteLine(
@@ -68,7 +69,8 @@ namespace LeftToDo
                     break;
             }
         }
-        // Task menu, handle user input with switch statement
+
+        // Static method - handle user input in switch statement
         private static void ShowTaskMenu(TaskList list)
         {
             list.ShowLeftToDo(list.ToDoList);
@@ -104,7 +106,8 @@ namespace LeftToDo
                     break;
             }
         }
-        // Archive menu, lets user return to Mainmenu
+
+        // Static method - display option for user to return to Mainmenu
         private static void ShowArchiveMenu(TaskList list)
         {
             Console.WriteLine("\n[0] Tillbaka till HUVUDMENY\n");
@@ -114,13 +117,15 @@ namespace LeftToDo
                 ShowMainMenu(list);
             }
         }
-        // Farewell message
+
+        // Static method - displays farewell message
         private static void ShowFarewell()
         {
             Console.WriteLine("\t\tTack för besöket och välkommen åter!\n\n");
             return;
         }
-        // Error message
+
+        // Static method - displays error message
         private static void ShowErrorMsg()
         {
             Console.WriteLine("\t\tOgiltligt val. Vargod försök igen!\n\n");
