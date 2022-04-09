@@ -1,3 +1,4 @@
+// Packafe lists handles all lists and their methods & functions
 package lists
 
 import (
@@ -7,11 +8,13 @@ import (
 	"github.com/WiviWonderWoman/DevUx/Go/tasks"
 )
 
+// A struct that for lists
 type TaskList struct {
-	ToDoList []tasks.Task
-	Archive  []tasks.Task
+	ToDoList []tasks.Task // Tasks ToDo
+	Archive  []tasks.Task // Archived done Tasks
 }
 
+// Public constructor function
 func NewTaskList() TaskList {
 	return TaskList{
 		ToDoList: []tasks.Task{},
@@ -19,64 +22,65 @@ func NewTaskList() TaskList {
 	}
 }
 
-func AddToDoTask(todoList []tasks.Task, task tasks.Task) []tasks.Task {
-	todoList = append(todoList, task)
-	return todoList
+// Adds new Task to ToDoList
+func (tl *TaskList) AddToDoTask(task tasks.Task) {
+	tl.ToDoList = append(tl.ToDoList, task)
 }
 
-func addTaskToArhive(archive []tasks.Task, task tasks.Task) []tasks.Task {
-	archive = append(archive, task)
-	return archive
+// Adds Task to Archive
+func (tl *TaskList) addTaskToArhive(task tasks.Task) {
+	tl.Archive = append(tl.Archive, task)
 }
 
-func ArchiveTask(list TaskList) TaskList {
+// Iterates thru ToDoList to find done Task to archive
+func (tl *TaskList) ArchiveTask() {
 	tdl := []tasks.Task{}
-	for i := 0; i < len(list.ToDoList); i++ {
-		task := list.ToDoList[i]
-		if task.Done == true {
-			list.Archive = addTaskToArhive(list.Archive, list.ToDoList[i])
-		} else if task.Done == false {
-			tdl = append(tdl, list.ToDoList[i])
+	for _, task := range tl.ToDoList {
+		if task.Done {
+			tl.addTaskToArhive(task)
+		} else {
+			tdl = append(tdl, task)
 		}
 	}
-	list.ToDoList = append(tdl)
-	return list
+	tl.ToDoList = append(tdl)
 }
 
-func ShowLeftToDo(list []tasks.Task) {
-	if len(list) < 1 {
+// Display ToDoList
+func (tl *TaskList) ShowLeftToDo() {
+	if len(tl.ToDoList) < 1 {
 		fmt.Println("\t\tATT GÖRA LISTAN ÄR TOM!")
 		return
 	}
-	fmt.Println("Status\t\tNr.\t\tUppgift")
+	fmt.Println("Status\tNr.\tUppgift")
 	index := 0
-	for _, task := range list {
+	for _, task := range tl.ToDoList {
 		index++
 		task.ShowTask(index)
-		if task.TaskType == "C" {
-			for i := 0; i < len(task.SubTask); i++ {
-				sub := task.SubTask[i]
-				sub.ShowSubTask(index, i+1)
-			}
-		}
 	}
 }
 
-func FindTaskToMark(list []tasks.Task) {
+// Find Task to mark as done / undone
+func (tl *TaskList) FindTaskToMark() {
 	fmt.Printf("\n\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.\n\n")
 	input := readInt()
-	for i := 0; i < len(list); i++ {
-		task := list[i]
+
+	for i := 0; i < len(tl.ToDoList); i++ {
+		task := tl.ToDoList[i]
+
 		if input == i {
 			if task.TaskType == "S" {
-				list[i] = task.MarkAsDone(task)
+				tl.ToDoList[i] = task.MarkAsDone(task)
+
 			} else if task.TaskType == "C" {
 				fmt.Printf("\n\nVilken underuppgift vill du markera / avmarkera?\n\n")
 				subInput := readInt()
+
 				count := len(task.SubTask)
 				marked := 0
+
 				for j := 0; j < count; j++ {
 					subTask := task.SubTask[j]
+
 					if subTask.Done {
 						marked++
 					}
@@ -87,18 +91,19 @@ func FindTaskToMark(list []tasks.Task) {
 					}
 				}
 				if count == marked {
-					list[i] = task.MarkAsDone(task)
+					tl.ToDoList[i] = task.MarkAsDone(task)
 				}
 			}
 		}
 	}
-	ShowLeftToDo(list)
+	tl.ShowLeftToDo()
 }
 
+// Parse input to an integer or displays error message
 func readInt() int {
 	var input string
 	fmt.Scanln(&input)
-	var number int
+
 	number, err := strconv.Atoi(input)
 	if err != nil {
 		fmt.Printf("\n\t\tDu skrev inte in en siffra. Försök igen.\n\n")
@@ -107,21 +112,26 @@ func readInt() int {
 	return number - 1
 }
 
-func ShowArchive(list []tasks.Task) {
-	if len(list) < 1 {
+// Display Archive
+func (tl *TaskList) ShowArchive() {
+	if len(tl.Archive) < 1 {
 		fmt.Printf("\n\t\tARKIVET ÄR TOMT.\n\n")
 		return
 	}
+
 	fmt.Println("UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift")
 	amount := 0
-	for i := 0; i < len(list); i++ {
-		task := list[i]
-		amount++
+
+	for i := 0; i < len(tl.Archive); i++ {
+		task := tl.Archive[i]
 		task.ShowTask(i + 1)
+		amount++
+
 		if task.TaskType == "C" {
 			for j := 0; j < len(task.SubTask); j++ {
 				sub := task.SubTask[j]
 				sub.ShowSubTask(i+1, j+1)
+				amount++
 			}
 		}
 	}

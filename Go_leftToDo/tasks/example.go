@@ -1,10 +1,39 @@
-//TODO: DELETE
 package tasks
 
 import "fmt"
 
+//[IDENTIFIER+ACCESS] [RETURNS]
+func readInt() (returnNr int, err error) {
+	returnNr = 1
+	e := example{}
+	// [INSTANCE][METHOD CALL]  [ARGUMENT]   // check for and handle error
+	if err = e.ReceiveIntReturnError(returnNr); err != nil {
+		return 0, err
+	}
+	return returnNr, nil
+}
+
+//[INSTANCE] [IDENTIFIER+ACCESS]   [PARAMETER] [RETURN]
+func (t example) ReceiveIntReturnError(number int) error {
+	// 			[FUNCTION CALL]
+	integer, err := readInt()
+	// check for and handle error
+	if err != nil {
+		return err
+	}
+	fmt.Println(number + integer)
+	return nil
+}
+
+/*
+
+
+
+
+
+ */
 // lowercase initial letter = private struct not exported to other packages
-type task struct {
+type example struct {
 	taskType    string        // describes task type user choose
 	description string        // what action / ToDo task user inputs
 	done        bool          // indicates if task is done
@@ -19,25 +48,8 @@ type TAsk struct {
 	SubTask     []*SimpleTask // if task is of type checklist, a slice with subtasks
 }
 
-//[IDENTIFIER+ACCESS] [RETURNS]
-func readInt() (int, error) {
-	number := 1
-	t := task{}
-	// 			 [METHOD CALL]  [ARGUMENT] check for and handle error
-	if err := t.ReceiveIntNoReturn(number); err != nil {
-		return 0, err
-	}
-	return number, nil
-}
+/*
 
-// [METHOD]	  [IDENTIFIER+ACCESS] [PARAMETER]	[RETURN]
-func (t task) ReceiveIntNoReturn(number int) error {
-	// 			[FUNCTION CALL]
-	integer, err := readInt()
-	// check for and handle error
-	if err != nil {
-		return err
-	}
-	fmt.Println(number + integer)
-	return nil
-}
+//TODO: DELETE
+
+*/

@@ -1,33 +1,46 @@
+// Package tasks handels all Task types and their functions & methods
 package tasks
 
 import "fmt"
 
+// A struct for embeding in other types of Tasks
 type Task struct {
 	TaskType    string        // describes task type user choose
-	Description string        // what action / ToDo task user inputs
+	Description string        // what action/ToDo-task user inputs
 	Done        bool          // indicates if task is done
 	SubTask     []*SimpleTask // if task is of type checklist, a slice with subtasks
 }
 
-type TaskRepository interface {
-	ShowTask(index int)
-	ShowSubTask(outer int, inner int)
-	MarkAsDone(t Task) Task
-	Create(description string)
-}
-
-func (t Task) ShowTask(index int) {
-	if !t.Done && t.TaskType == "C" {
-		fmt.Println(" - \t\t", index, "\t\t", t.Description)
-	} else if !t.Done && t.TaskType == "S" {
-		fmt.Println("[ ]\t\t", index, "\t\t", t.Description)
-	} else if t.Done {
-		fmt.Println("[X]\t\t", index, "\t\t", t.Description)
-	}
-}
-
+// Marks task as Done
 func (t Task) MarkAsDone(task Task) Task {
-	fmt.Println("DONE, TASK", task)
 	task.Done = !task.Done
 	return task
 }
+
+// Interface that specifies method that diffrent Tasks types implement
+type TaskRepository interface {
+	MarkAsDone(t Task) Task           // Marks task as Done
+	Create(description string) *Task  // Takes info from user
+	ShowTask(index int)               // Displays any Task
+	ShowSubTask(outer int, inner int) // Displas simple Task
+
+}
+
+// Displays any Task
+func (t Task) ShowTask(index int) {
+	if !t.Done && t.TaskType == "C" {
+		fmt.Println(" - \t", index, "\t", t.Description)
+		for i := 0; i < len(t.SubTask); i++ {
+			sub := t.SubTask[i]
+			sub.ShowSubTask(index, i+1)
+		}
+	} else if !t.Done && t.TaskType == "S" {
+		fmt.Println("[ ]\t", index, "\t", t.Description)
+	} else if t.Done {
+		fmt.Println("[X]\t", index, "\t", t.Description)
+	}
+}
+
+/*
+
+ */
