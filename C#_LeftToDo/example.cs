@@ -1,15 +1,15 @@
 using System;
 
-namespace LeftToDo
+namespace Example
 {
     private class Example
     {
-        public void ReceiveIntNoReturn(int number)
+        public void ReceiveStringNoReturn(string parameter)
         {
             try
             {
-                var integer = ReturnInt();
-                Console.WriteLine(number + integer);
+                var returnValue = ReturnString();
+                Console.WriteLine(parameter + returnValue);
             }
             catch (System.Exception)
             {
@@ -17,20 +17,24 @@ namespace LeftToDo
             }
         }
 
-        private static int ReturnInt()
+        private static int ReturnString()
         {
-            int returnNr = 1;
-            var e = Example;
+            string returnString = " Retur";
+
+            string argument;
+            argument = "Argument";
+
+            Example e = Example;
 
             try
             {
-                e.ReceiveIntNoReturn(returnNr);
+                e.ReceiveStringNoReturn(argument);
             }
             catch (System.Exception)
             {
                 throw new Error();
             }
-            return returnNr;
+            return returnString;
         }
 
 
