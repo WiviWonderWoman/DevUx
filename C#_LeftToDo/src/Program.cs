@@ -1,10 +1,6 @@
-﻿using LeftToDo.Lists;
 using System;
-using System.Text;
+using LeftToDo.Lists;
 using LeftToDo.Menus;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using LeftToDo.Tasks;
 
 namespace LeftToDo
 {
