@@ -52,7 +52,7 @@ namespace LeftToDo.Lists
             }
         }
 
-        // Display ToDoList  
+        /// <summary>Display ToDoList</summary>  
         internal void ShowLeftToDo(List<Task> ToDoList)
         {
             if (ToDoList.Count < 1)
