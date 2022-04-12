@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using LeftToDo.Tasks;
 
-namespace LeftToDo
+namespace LeftToDo.Lists
 {
     /* ToDolist a class that handles all lists and their methods */
     public class TaskList

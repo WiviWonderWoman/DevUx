@@ -1,6 +1,6 @@
 using System;
 
-namespace LeftToDo
+namespace LeftToDo.Tasks
 {
     public class SimpleTask : Task // Derives from Task
     {

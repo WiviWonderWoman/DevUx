@@ -4,15 +4,32 @@ namespace Example
 {
     private class Example
     {
+        private static void Variables()
+        {
+            string declare;
+            declare = "assign";
+
+            var declareAndAssign = "Declare and " + declare;
+
+            string x, y, z = "declare "; "assign "; "multiple variables";
+        }
+
+
         private static void Loops()
         {
+
             int length = 2;
-            bool keepLooping = true;
             int[] arr = { 1, 2, 3 };
+            bool keepLooping = true;
 
             for (int i = 0; i < length; i++)
             {
                 // Take appropriate action
+            }
+
+            foreach (var nr in arr)
+            {
+                Console.WriteLine(nr);
             }
 
             while (keepLooping)
@@ -24,11 +41,6 @@ namespace Example
             {
                 !keepLooping = true;
             } while (true);
-
-            foreach (var nr in arr)
-            {
-                Console.WriteLine(nr);
-            }
         }
 
 

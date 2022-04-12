@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LeftToDo
+namespace LeftToDo.Tasks
 {
     // Abstract super class, all types of Task derives from Task
     public abstract class Task
@@ -11,16 +11,19 @@ namespace LeftToDo
             get;
             set;
         }
+
         public string description // what action/ToDo-task user inputs
         {
             get;
             set;
         }
+
         public bool done // indicates if task is done
         {
             get;
             set;
         }
+
         // if task is of type checklist, a slice with subtasks
         public List<SimpleTask> subTask;
 
@@ -29,6 +32,7 @@ namespace LeftToDo
         {
             done = !done;
         }
+
         // Takes info from user, overrides in each subclass
         internal abstract void Create();
 

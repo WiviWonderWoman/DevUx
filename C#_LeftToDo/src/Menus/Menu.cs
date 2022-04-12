@@ -1,6 +1,8 @@
 using System;
+using LeftToDo.Lists;
+using LeftToDo.Tasks;
 
-namespace LeftToDo
+namespace LeftToDo.Menus
 {
     abstract class Menu // Menu displays and handles out- / input
     {

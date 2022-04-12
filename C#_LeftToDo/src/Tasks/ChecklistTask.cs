@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LeftToDo
+namespace LeftToDo.Tasks
 {
     public class Checklist : Task // Derives from Task
     {
