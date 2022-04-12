@@ -1,4 +1,3 @@
-// Packafe lists handles all lists and their methods & functions
 package lists
 
 import (
@@ -8,13 +7,11 @@ import (
 	"github.com/WiviWonderWoman/DevUx/Go/tasks"
 )
 
-// A struct that for lists
 type TaskList struct {
-	ToDoList []tasks.Task // Tasks ToDo
-	Archive  []tasks.Task // Archived done Tasks
+	ToDoList []tasks.Task
+	Archive  []tasks.Task
 }
 
-// Public constructor function
 func NewTaskList() TaskList {
 	return TaskList{
 		ToDoList: []tasks.Task{},
@@ -22,32 +19,32 @@ func NewTaskList() TaskList {
 	}
 }
 
-// Adds new Task to ToDoList
-func (tl *TaskList) AddToDoTask(task tasks.Task) {
-	tl.ToDoList = append(tl.ToDoList, task)
+func AddToDoTask(todoList []tasks.Task, task tasks.Task) []tasks.Task {
+	todoList = append(todoList, task)
+	return todoList
 }
 
-// Adds Task to Archive
-func (tl *TaskList) addTaskToArhive(task tasks.Task) {
-	tl.Archive = append(tl.Archive, task)
+func addTaskToArhive(archive []tasks.Task, task tasks.Task) []tasks.Task {
+	archive = append(archive, task)
+	return archive
 }
 
-// Iterates thru ToDoList to find done Task to archive
-func (tl *TaskList) ArchiveTask() {
+func ArchiveTask(list TaskList) TaskList {
 	tdl := []tasks.Task{}
-	for _, task := range tl.ToDoList {
-		if task.Done {
-			tl.addTaskToArhive(task)
-		} else {
-			tdl = append(tdl, task)
+	for i := 0; i < len(list.ToDoList); i++ {
+		task := list.ToDoList[i]
+		if task.Done == true {
+			list.Archive = addTaskToArhive(list.Archive, list.ToDoList[i])
+		} else if task.Done == false {
+			tdl = append(tdl, list.ToDoList[i])
 		}
 	}
-	tl.ToDoList = append(tdl)
+	list.ToDoList = append(tdl)
+	return list
 }
 
-// Display ToDoList
-func (tl *TaskList) ShowLeftToDo() {
-	if len(tl.ToDoList) < 1 {
+func ShowLeftToDo(list []tasks.Task) {
+	if len(list) < 1 {
 		fmt.Println("\t\tATT GÖRA LISTAN ÄR TOM!")
 		return
 	}
@@ -60,28 +57,21 @@ func (tl *TaskList) ShowLeftToDo() {
 	}
 }
 
-// Find Task to mark as done / undone
-func (tl *TaskList) FindTaskToMark() {
+func FindTaskToMark(list []tasks.Task) {
 	fmt.Printf("\n\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.\n\n")
 	input := readInt()
-
-	for i := 0; i < len(tl.ToDoList); i++ {
-		task := tl.ToDoList[i]
-
+	for i := 0; i < len(list); i++ {
+		task := list[i]
 		if input == i {
 			if task.TaskType == "S" {
-				tl.ToDoList[i] = task.MarkAsDone(task)
-
+				list[i] = task.MarkAsDone(task)
 			} else if task.TaskType == "C" {
 				fmt.Printf("\n\nVilken underuppgift vill du markera / avmarkera?\n\n")
 				subInput := readInt()
-
 				count := len(task.SubTask)
 				marked := 0
-
 				for j := 0; j < count; j++ {
 					subTask := task.SubTask[j]
-
 					if subTask.Done {
 						marked++
 					}
@@ -92,19 +82,22 @@ func (tl *TaskList) FindTaskToMark() {
 					}
 				}
 				if count == marked {
-					tl.ToDoList[i] = task.MarkAsDone(task)
+					list[i] = task.MarkAsDone(task)
 				}
 			}
 		}
 	}
-	tl.ShowLeftToDo()
+	ShowLeftToDo(list)
 }
 
-// Parse input to an integer or displays error message
 func readInt() int {
 
 	var input string
 	fmt.Scanln(&input)
+<<<<<<< HEAD
+=======
+	var number int
+>>>>>>> parent of 60b99c1... tidy up and commented
 	number, err := strconv.Atoi(input)
 
 	for err != nil {
@@ -115,26 +108,21 @@ func readInt() int {
 	return number - 1
 }
 
-// Display Archive
-func (tl *TaskList) ShowArchive() {
-	if len(tl.Archive) < 1 {
+func ShowArchive(list []tasks.Task) {
+	if len(list) < 1 {
 		fmt.Printf("\n\t\tARKIVET ÄR TOMT.\n\n")
 		return
 	}
-
 	fmt.Println("UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift")
 	amount := 0
-
-	for i := 0; i < len(tl.Archive); i++ {
-		task := tl.Archive[i]
-		task.ShowTask(i + 1)
+	for i := 0; i < len(list); i++ {
+		task := list[i]
 		amount++
-
+		task.ShowTask(i + 1)
 		if task.TaskType == "C" {
 			for j := 0; j < len(task.SubTask); j++ {
 				sub := task.SubTask[j]
 				sub.ShowSubTask(i+1, j+1)
-				amount++
 			}
 		}
 	}
