@@ -10,12 +10,12 @@ type Task struct {
 }
 
 type TaskRepository interface {
-	ShowTask(index int)
-	ShowSubTask(outer int, inner int)
-	MarkAsDone(t Task) Task
-	Create(description string)
+	ShowTask(index int)        //  Displays Task
+	MarkAsDone(t Task) Task    // Marks task as Done
+	Create(description string) // Add info from user as description
 }
 
+//  Displays Task
 func (t Task) ShowTask(index int) {
 
 	if !t.Done && t.TaskType == "C" {
@@ -32,6 +32,7 @@ func (t Task) ShowTask(index int) {
 	}
 }
 
+// Marks task as Done
 func (t Task) MarkAsDone(task Task) Task {
 	task.Done = !task.Done
 	return task

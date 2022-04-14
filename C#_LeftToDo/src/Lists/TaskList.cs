@@ -4,15 +4,15 @@ using LeftToDo.Tasks;
 
 namespace LeftToDo.Lists
 {
-    /* ToDolist a class that handles all lists and their methods */
+    // TaskList a class that handles all lists and their methods 
     public class TaskList
     {
-        public List<Task> ToDoList // Tasks ToDo
+        public List<Task> ToDoList // slice with ToDo tasks
         {
             get;
             private set;
         }
-        public List<Task> Archive // Archived done Tasks
+        public List<Task> Archive // slice with Done tasks
         {
             get;
             private set;

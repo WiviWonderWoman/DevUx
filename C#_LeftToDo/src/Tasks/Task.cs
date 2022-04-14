@@ -6,23 +6,13 @@ namespace LeftToDo.Tasks
     // Abstract super class, all types of Task derives from Task
     public abstract class Task
     {
-        public string type // describes task type user choose
-        {
-            get;
-            set;
-        }
+        // describes task type user choose
+        public string type { get; set; }
 
-        public string description // what action/ToDo-task user inputs
-        {
-            get;
-            set;
-        }
-
-        public bool done // indicates if task is done
-        {
-            get;
-            set;
-        }
+        // what action/ToDo-task user inputs
+        public string description { get; set; }
+        // indicates if task is done
+        public bool done { get; set; }
 
         // if task is of type checklist, a slice with subtasks
         public List<SimpleTask> subTask;
@@ -33,7 +23,7 @@ namespace LeftToDo.Tasks
             done = !done;
         }
 
-        // Takes info from user, overrides in each subclass
+        // Takes info from user as description, overrides in each subclass
         internal abstract void Create();
 
         //  Displays any Task
@@ -60,8 +50,3 @@ namespace LeftToDo.Tasks
         }
     }
 }
-
-/*
-
-
-*/

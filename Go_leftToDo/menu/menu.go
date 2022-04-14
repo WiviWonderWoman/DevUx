@@ -1,3 +1,4 @@
+// Package menu displays and handles out- / input
 package menu
 
 import (
@@ -7,6 +8,7 @@ import (
 	"github.com/WiviWonderWoman/DevUx/Go/tasks"
 )
 
+// Displays main menu
 func ShowMainMenu(list lists.TaskList) {
 	fmt.Printf("\n\tHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta\n")
 	showIntro()
@@ -27,10 +29,12 @@ func ShowMainMenu(list lists.TaskList) {
 	}
 }
 
+// Displays instructions to user
 func showIntro() {
 	fmt.Printf("\nVälj siffra inom [] följt av enter.\n")
 }
 
+// Displays submenu
 func showToDoMenu(list lists.TaskList) {
 	fmt.Printf(
 		"\n\tUNDERMENY: Vad vill du göra?\n" +
@@ -60,6 +64,7 @@ func showToDoMenu(list lists.TaskList) {
 	}
 }
 
+// Display task menu
 func showTaskMenu(list lists.TaskList) {
 	list.ShowLeftToDo()
 	fmt.Printf(
@@ -90,6 +95,7 @@ func showTaskMenu(list lists.TaskList) {
 	}
 }
 
+// Displays option for user to return to main menu
 func showArchiveMenu(list lists.TaskList) {
 	fmt.Printf("\n[0] Tillbaka till HUVUDMENY\n")
 	var input string
@@ -102,10 +108,12 @@ func showArchiveMenu(list lists.TaskList) {
 	}
 }
 
+// Displays farewell message
 func showFarewell() {
 	fmt.Printf("\n\t\tTack för besöket och välkommen åter!\n\n")
 }
 
+// Displays error message
 func showErrorMsg() {
 	fmt.Printf("\n\t\tOgiltligt val. Vargod försök igen!\n\n")
 }

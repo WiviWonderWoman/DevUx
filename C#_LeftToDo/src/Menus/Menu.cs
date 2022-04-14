@@ -6,7 +6,7 @@ namespace LeftToDo.Menus
 {
     abstract class Menu // Menu displays and handles out- / input
     {
-        // Static method - displays main menu & handles user input in switch statement
+        // Displays main menu 
         internal static void ShowMainMenu(TaskList list)
         {
             Console.WriteLine("\tHUVUDMENY\n[1] Visa Att-göra uppgifter\n[2] Visa Arkiverade uppgifter\n[0] Avsluta");
@@ -31,13 +31,14 @@ namespace LeftToDo.Menus
                     break;
             }
         }
-        // Static method - displays instructions to user
+
+        // Displays instructions to user
         private static void ShowIntro()
         {
             Console.WriteLine("\nVälj siffra inom [] följt av enter.\n");
         }
 
-        // Static method - handles user input in switch statement
+        // Displays submenu
         private static void ShowToDoMenu(TaskList list)
         {
             Console.WriteLine(
@@ -72,7 +73,7 @@ namespace LeftToDo.Menus
             }
         }
 
-        // Static method - handle user input in switch statement
+        // Display task menu
         private static void ShowTaskMenu(TaskList list)
         {
             list.ShowLeftToDo(list.ToDoList);
@@ -109,7 +110,7 @@ namespace LeftToDo.Menus
             }
         }
 
-        // Static method - display option for user to return to Mainmenu
+        // Displays option for user to return to main menu
         private static void ShowArchiveMenu(TaskList list)
         {
             Console.WriteLine("\n[0] Tillbaka till HUVUDMENY\n");
@@ -120,14 +121,14 @@ namespace LeftToDo.Menus
             }
         }
 
-        // Static method - displays farewell message
+        // Displays farewell message
         private static void ShowFarewell()
         {
             Console.WriteLine("\t\tTack för besöket och välkommen åter!\n\n");
             return;
         }
 
-        // Static method - displays error message
+        // Displays error message
         private static void ShowErrorMsg()
         {
             Console.WriteLine("\t\tOgiltligt val. Vargod försök igen!\n\n");

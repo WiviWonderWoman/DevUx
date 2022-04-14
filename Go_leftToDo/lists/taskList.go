@@ -7,11 +7,13 @@ import (
 	"github.com/WiviWonderWoman/DevUx/Go/tasks"
 )
 
+// TaskList a struct that handles all lists and their methods
 type TaskList struct {
-	ToDoList []tasks.Task
-	Archive  []tasks.Task
+	ToDoList []tasks.Task // slice with ToDo tasks
+	Archive  []tasks.Task // slice with Done tasks
 }
 
+// Constructor function
 func NewTaskList() TaskList {
 	return TaskList{
 		ToDoList: []tasks.Task{},
@@ -19,14 +21,17 @@ func NewTaskList() TaskList {
 	}
 }
 
+// Adds new Task to ToDoList
 func (tl *TaskList) AddToDoTask(task tasks.Task) {
 	tl.ToDoList = append(tl.ToDoList, task)
 }
 
+// Adds Task to Archive
 func (tl *TaskList) addTaskToArhive(task tasks.Task) {
 	tl.Archive = append(tl.Archive, task)
 }
 
+// Iterates thru ToDoList to find done Task to archive
 func (tl *TaskList) ArchiveTask() {
 	tdl := []tasks.Task{}
 	for i := 0; i < len(tl.ToDoList); i++ {
@@ -40,6 +45,7 @@ func (tl *TaskList) ArchiveTask() {
 	tl.ToDoList = append(tdl)
 }
 
+// Display ToDoList
 func (tl *TaskList) ShowLeftToDo() {
 	if len(tl.ToDoList) < 1 {
 		fmt.Println("\t\tATT GÖRA LISTAN ÄR TOM!")
@@ -52,6 +58,7 @@ func (tl *TaskList) ShowLeftToDo() {
 	}
 }
 
+// Find Task to mark as done / undone
 func (tl *TaskList) FindTaskToMark() {
 	fmt.Printf("\n\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.\n\n")
 	input := readInt()
@@ -85,6 +92,7 @@ func (tl *TaskList) FindTaskToMark() {
 	tl.ShowLeftToDo()
 }
 
+// Parse input to an integer or displays error message
 func readInt() int {
 
 	var input string
@@ -98,6 +106,7 @@ func readInt() int {
 	return number - 1
 }
 
+// Display Archive
 func (tl *TaskList) ShowArchive() {
 	if len(tl.Archive) < 1 {
 		fmt.Printf("\n\t\tARKIVET ÄR TOMT.\n\n")

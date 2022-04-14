@@ -5,10 +5,12 @@ import (
 	"strings"
 )
 
+// struct with Task embedded
 type ChecklistTask struct {
 	Task
 }
 
+// Constructor function
 func newChecklistTask(description string) *ChecklistTask {
 	c := ChecklistTask{}
 	c.TaskType = "C"
@@ -18,6 +20,7 @@ func newChecklistTask(description string) *ChecklistTask {
 	return &c
 }
 
+// Adds input from user as description.
 func (c ChecklistTask) Create() *ChecklistTask {
 	fmt.Printf("\nAnge Rubrik-uppgift:\n")
 	var input string

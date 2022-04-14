@@ -4,11 +4,13 @@ import (
 	"fmt"
 )
 
+// struct with Task embedded
 type SimpleTask struct {
 	Task
 	MarkAsDoneFn func(simple SimpleTask) SimpleTask
 }
 
+// Constructor function
 func NewSimpleTask(description string) *SimpleTask {
 	s := SimpleTask{}
 	s.TaskType = "S"
@@ -17,6 +19,7 @@ func NewSimpleTask(description string) *SimpleTask {
 	return &s
 }
 
+// Adds input from user as description.
 func (s SimpleTask) Create() *SimpleTask {
 	fmt.Printf("\nAnge uppgift:\n")
 	var input string
@@ -25,6 +28,7 @@ func (s SimpleTask) Create() *SimpleTask {
 	return simple
 }
 
+// Displays SimpleTask in ChecklistTasks subTask
 func (s *SimpleTask) ShowSubTask(outer int, inner int) {
 	if !s.Done {
 		fmt.Println("[ ]\t", outer, " - ", inner, "\t", s.Description)
