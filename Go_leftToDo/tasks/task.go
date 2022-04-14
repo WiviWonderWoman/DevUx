@@ -1,21 +1,32 @@
+// Package tasks handels all Task types and their functions & methods
 package tasks
 
 import "fmt"
 
+// A struct for embeding in other types of Tasks
 type Task struct {
 	TaskType    string        // describes task type user choose
-	Description string        // what action / ToDo task user inputs
+	Description string        // what action/ToDo-task user inputs
 	Done        bool          // indicates if task is done
 	SubTask     []*SimpleTask // if task is of type checklist, a slice with subtasks
 }
 
-type TaskRepository interface {
-	ShowTask(index int)        //  Displays Task
-	MarkAsDone(t Task) Task    // Marks task as Done
-	Create(description string) // Add info from user as description
+// Marks task as Done
+func (t Task) MarkAsDone(task Task) Task {
+	task.Done = !task.Done
+	return task
 }
 
-//  Displays Task
+// Interface that specifies method that diffrent Tasks types implement
+type TaskRepository interface {
+	MarkAsDone(t Task) Task           // Marks task as Done
+	Create(description string) *Task  // Takes info from user
+	ShowTask(index int)               // Displays any Task
+	ShowSubTask(outer int, inner int) // Displas simple Task
+
+}
+
+// Displays any Task
 func (t Task) ShowTask(index int) {
 
 	if !t.Done && t.TaskType == "C" {
@@ -30,10 +41,4 @@ func (t Task) ShowTask(index int) {
 	} else if t.Done {
 		fmt.Println("[X]\t", index, "\t", t.Description)
 	}
-}
-
-// Marks task as Done
-func (t Task) MarkAsDone(task Task) Task {
-	task.Done = !task.Done
-	return task
 }
