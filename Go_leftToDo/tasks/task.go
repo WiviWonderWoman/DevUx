@@ -26,14 +26,13 @@ func (t Task) ShowTask(index int) {
 			sub.ShowSubTask(index, i+1)
 		}
 	} else if !t.Done && t.TaskType == "S" {
-		fmt.Println("[ ]\t\t", index, "\t\t", t.Description)
+		fmt.Println("[ ]\t", index, "\t", t.Description)
 	} else if t.Done {
-		fmt.Println("[X]\t\t", index, "\t\t", t.Description)
+		fmt.Println("[X]\t", index, "\t", t.Description)
 	}
 }
 
 func (t Task) MarkAsDone(task Task) Task {
-	fmt.Println("DONE, TASK", task)
 	task.Done = !task.Done
 	return task
 }

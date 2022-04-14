@@ -27,9 +27,9 @@ func (s SimpleTask) Create() *SimpleTask {
 
 func (s *SimpleTask) ShowSubTask(outer int, inner int) {
 	if !s.Done {
-		fmt.Println("\t[ ]\t", outer, " - ", inner, "\t", s.Description)
+		fmt.Println("[ ]\t", outer, " - ", inner, "\t", s.Description)
 	} else if s.Done {
-		fmt.Println("\t[X]\t", outer, " - ", inner, "\t", s.Description)
+		fmt.Println("[X]\t", outer, " - ", inner, "\t", s.Description)
 	}
 }
 

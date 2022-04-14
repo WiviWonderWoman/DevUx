@@ -48,7 +48,7 @@ func (tl *TaskList) ShowLeftToDo() {
 	fmt.Println("Status\tNr.\tUppgift")
 
 	for index, task := range tl.ToDoList {
-		task.ShowTask(index)
+		task.ShowTask(index + 1)
 	}
 }
 
