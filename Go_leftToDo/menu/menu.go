@@ -14,7 +14,7 @@ func ShowMainMenu(list lists.TaskList) {
 	fmt.Scanln(&input)
 	switch input {
 	case "1":
-		lists.ShowLeftToDo(list.ToDoList)
+		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case "2":
 		lists.ShowArchive(list.Archive)
@@ -46,11 +46,11 @@ func showToDoMenu(list lists.TaskList) {
 	case "1":
 		showTaskMenu(list)
 	case "2":
-		lists.FindTaskToMark(list.ToDoList)
+		list.FindTaskToMark()
 		showToDoMenu(list)
 	case "3":
-		list = lists.ArchiveTask(list)
-		lists.ShowLeftToDo(list.ToDoList)
+		list.ArchiveTask()
+		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case "0":
 		ShowMainMenu(list)
@@ -61,7 +61,7 @@ func showToDoMenu(list lists.TaskList) {
 }
 
 func showTaskMenu(list lists.TaskList) {
-	lists.ShowLeftToDo(list.ToDoList)
+	list.ShowLeftToDo()
 	fmt.Printf(
 		"\n\tUPPGIFTSMENY. Välj typ av uppgift:\n" +
 			"[1] Enkel uppgift\n" +
@@ -74,13 +74,13 @@ func showTaskMenu(list lists.TaskList) {
 	switch input {
 	case "1":
 		simple := tasks.SimpleTask{}.Create()
-		list.ToDoList = lists.AddToDoTask(list.ToDoList, simple.Task)
-		lists.ShowLeftToDo(list.ToDoList)
+		list.AddToDoTask(simple.Task)
+		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case "2":
 		checklist := tasks.ChecklistTask{}.Create()
-		list.ToDoList = lists.AddToDoTask(list.ToDoList, checklist.Task)
-		lists.ShowLeftToDo(list.ToDoList)
+		list.AddToDoTask(checklist.Task)
+		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case "0":
 		ShowMainMenu(list)

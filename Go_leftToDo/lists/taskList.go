@@ -19,52 +19,47 @@ func NewTaskList() TaskList {
 	}
 }
 
-func AddToDoTask(todoList []tasks.Task, task tasks.Task) []tasks.Task {
-	todoList = append(todoList, task)
-	return todoList
+func (tl *TaskList) AddToDoTask(task tasks.Task) {
+	tl.ToDoList = append(tl.ToDoList, task)
 }
 
-func addTaskToArhive(archive []tasks.Task, task tasks.Task) []tasks.Task {
-	archive = append(archive, task)
-	return archive
+func (tl *TaskList) addTaskToArhive(task tasks.Task) {
+	tl.Archive = append(tl.Archive, task)
 }
 
-func ArchiveTask(list TaskList) TaskList {
+func (tl *TaskList) ArchiveTask() {
 	tdl := []tasks.Task{}
-	for i := 0; i < len(list.ToDoList); i++ {
-		task := list.ToDoList[i]
+	for i := 0; i < len(tl.ToDoList); i++ {
+		task := tl.ToDoList[i]
 		if task.Done == true {
-			list.Archive = addTaskToArhive(list.Archive, list.ToDoList[i])
+			tl.addTaskToArhive(tl.ToDoList[i])
 		} else if task.Done == false {
-			tdl = append(tdl, list.ToDoList[i])
+			tdl = append(tdl, tl.ToDoList[i])
 		}
 	}
-	list.ToDoList = append(tdl)
-	return list
+	tl.ToDoList = append(tdl)
 }
 
-func ShowLeftToDo(list []tasks.Task) {
-	if len(list) < 1 {
+func (tl *TaskList) ShowLeftToDo() {
+	if len(tl.ToDoList) < 1 {
 		fmt.Println("\t\tATT GÖRA LISTAN ÄR TOM!")
 		return
 	}
 	fmt.Println("Status\tNr.\tUppgift")
 
-	index := 1
-	for _, task := range tl.ToDoList {
+	for index, task := range tl.ToDoList {
 		task.ShowTask(index)
-		index++
 	}
 }
 
-func FindTaskToMark(list []tasks.Task) {
+func (tl *TaskList) FindTaskToMark() {
 	fmt.Printf("\n\nVilken uppgift vill du markera / avmarkera? Är det en under uppgift, ange först rubrikens nummer.\n\n")
 	input := readInt()
-	for i := 0; i < len(list); i++ {
-		task := list[i]
+	for i := 0; i < len(tl.ToDoList); i++ {
+		task := tl.ToDoList[i]
 		if input == i {
 			if task.TaskType == "S" {
-				list[i] = task.MarkAsDone(task)
+				tl.ToDoList[i] = task.MarkAsDone(task)
 			} else if task.TaskType == "C" {
 				fmt.Printf("\n\nVilken underuppgift vill du markera / avmarkera?\n\n")
 				subInput := readInt()
@@ -82,24 +77,19 @@ func FindTaskToMark(list []tasks.Task) {
 					}
 				}
 				if count == marked {
-					list[i] = task.MarkAsDone(task)
+					tl.ToDoList[i] = task.MarkAsDone(task)
 				}
 			}
 		}
 	}
-	ShowLeftToDo(list)
+	tl.ShowLeftToDo()
 }
 
 func readInt() int {
 
 	var input string
 	fmt.Scanln(&input)
-<<<<<<< HEAD
-=======
-	var number int
->>>>>>> parent of 60b99c1... tidy up and commented
 	number, err := strconv.Atoi(input)
-
 	for err != nil {
 		fmt.Printf("\n\t\tDu skrev inte in en siffra. Försök igen.\n\n")
 		fmt.Scanln(&input)
@@ -108,15 +98,15 @@ func readInt() int {
 	return number - 1
 }
 
-func ShowArchive(list []tasks.Task) {
-	if len(list) < 1 {
+func (tl *TaskList) ShowArchive() {
+	if len(tl.Archive) < 1 {
 		fmt.Printf("\n\t\tARKIVET ÄR TOMT.\n\n")
 		return
 	}
 	fmt.Println("UTFÖRDA UPPGIFTER:\nStatus\tArkiv.\tUppgift")
 	amount := 0
-	for i := 0; i < len(list); i++ {
-		task := list[i]
+	for i := 0; i < len(tl.Archive); i++ {
+		task := tl.Archive[i]
 		amount++
 		task.ShowTask(i + 1)
 		if task.TaskType == "C" {
