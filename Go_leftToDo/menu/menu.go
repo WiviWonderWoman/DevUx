@@ -17,7 +17,7 @@ func ShowMainMenu(list lists.TaskList) {
 		list.ShowLeftToDo()
 		showToDoMenu(list)
 	case "2":
-		lists.ShowArchive(list.Archive)
+		list.ShowArchive()
 		showArchiveMenu(list)
 	case "0":
 		showFarewell()
